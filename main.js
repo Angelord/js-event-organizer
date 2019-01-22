@@ -4,7 +4,7 @@ var idGenerator = {
     next : function() { return ++this.lastId; }
 };
 
-var events = [];
+var events = {};
 
 main();
 
@@ -13,16 +13,18 @@ function main() {
     var event = new Event("New year party", true);
     var event2 = new Event("Wedding", false);
 
-    events.push(event);
-    events.push(event2);
+    events[event2.id] = event2;
 
-    displayEvents();
+    displayEvents(events);
 }
 
 function Event(name, adultOnly) {
+
     this.id = idGenerator.next();
     this.name = name;
     this.adultOnly = adultOnly;
+    
+    events[this.id] = this;
 }
 
 function Client(firstName, lastName, gender, age) {
