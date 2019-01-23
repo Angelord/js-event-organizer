@@ -4,7 +4,7 @@ var events = {};
 var controller = {
 
     validateCreation : function(name, adultOnly) {
-        return (!isBlank(name));
+        return (!strings.isBlank(name));
     },
 
     validateModify : function(id, name, adultOnly) {
@@ -24,10 +24,13 @@ var controller = {
     modifyEvent : function(id, name, adultOnly) {
         events[id].name = name;
         events[id].adultOnly = adultOnly;
+        return events[id];
     }, 
 
     removeEvent : function(id) {
+        var event = events[id];
         delete events[id];
+        return event;
     }
 }
 

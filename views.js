@@ -74,7 +74,8 @@ function modifyEvent() {
 function removeEvent() {
     var removeField = document.getElementById("input_remove_id");
 
-    controller.removeEvent(removeField.value);
+    var removedEv = controller.removeEvent(removeField.value);
     displayEvents();
+    alert("Removed event with name " + removedEv.name);
 }
 
