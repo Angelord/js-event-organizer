@@ -1,4 +1,8 @@
 
+* {
+    font-family: 'Courier New', Courier, monospace;
+}
+
 div.options form {
     float: left;
     clear: right;
@@ -23,23 +27,42 @@ div.options input, label {
 div.options input.submit_btn {
     width: 80%;
     position: relative;
-    /* bottom: 5px; */
-    /* bottom: 10px; */
     margin: 5% 10% 0% 10%;
 }
 
-table {
-    font-family: arial, sans-serif;
-    border-collapse: collapse;
-    width: 100%;
-}
-
-td, th {
+div.table div.row {
+    padding: 0px;
+    margin: 0% 2% 0% 2%;
+    width: 92%;
+    height: 30px;
+    clear: left;
+    display: inline-block;
     border: 1px solid #dddddd;
-    text-align: left;
-    padding: 6px;
 }
 
-tr:nth-child(even) {
+div.table div.col {
+    font-family: 'Courier New', Courier, monospace;
+    width: 20%;
+    height: 100%;
+    float: left;
+    text-align: left;
+    line-height: 30px;
+}
+
+div.table div.row:nth-child(even) {
     background-color: #dddddd;
+}
+
+div.row div.col:nth-child(1) {
+    width: 5%;
+    text-align: center;
+}
+
+div.row div.col:nth-child(2) {
+    width: auto;
+}
+
+div.row div.col:nth-child(3) {
+    width: 5%;
+    float: right;
 }

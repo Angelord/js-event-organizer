@@ -17,11 +17,14 @@ function fillEventTable(table) {
     for(var key in events) {
         var event = events[key];
 
-        var row = document.createElement("tr");
-        
-        var idEl = createElementWithText("th", event.id);
-        var nameEl = createElementWithText("th", event.name);
-        var adultOnly = createElementWithText("th", event.adultOnly ? "+18" : "");
+        var row = document.createElement("div");
+        row.className = "row";
+
+        var idEl = createElementWithText("div", event.id);
+        var nameEl = createElementWithText("div", event.name);
+        var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "");
+
+        idEl.className = nameEl.className = adultOnly.className = "col";
 
         row.appendChild(idEl);
         row.appendChild(nameEl);
