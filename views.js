@@ -8,8 +8,8 @@ function displayEvents() {
 
     var optionsGroup = document.createElement("div");
     optionsGroup.className = "options";
-    var addUI = createAddUI();
-    var removalUI = createRemovalUI();
+    var addUI = getCreationUI();
+    var removalUI = getRemovalUI();
     var evTable = createEventTable();
 
     optionsGroup.appendChild(addUI);
@@ -50,7 +50,7 @@ function createElementWithText(elType, text) {
     return element;
 }
 
-function createRemovalUI() {
+function getRemovalUI() {
     var div = document.createElement("div");
 
     var form = "\
@@ -65,11 +65,11 @@ function createRemovalUI() {
     return div;
 }
 
-function createAddUI() {
+function getCreationUI() {
     var div = document.createElement("div");
 
     var form = "\
-    <form action='JavaScript:addEvent()' onsubmit='return validateAdd()'>\
+    <form action='JavaScript:createEvent()' onsubmit='return validateCreation()'>\
     <h4> Add New Event:</h4>\
     <label for='input_add_name'>Name</label>            <input type='text' name='name' id='input_add_name'/>\
     <label for='input_add_adult'>Adult Only</label>     <input type='checkbox' name='adultOnly' id='input_add_adult'/>\
@@ -81,21 +81,19 @@ function createAddUI() {
     return div;
 }
 
-function validateAdd() {
+function validateCreation() {
     var nameField = document.getElementById("input_add_name");
     var adultField = document.getElementById("input_add_adult");
 
-    return (!isBlank(nameField.value));
+    return controller.validateCreation(nameField, adultField);
 }
 
 function validateRemoval() {
     var removeField = document.getElementById("input_remove_id");
-    return (removeField.value in events);
+    return controller.validateRemoval(removeField.value);
 }
 
-
-//TODO : Move to controller.js
-function addEvent() {
+function createEvent() {
     var nameField = document.getElementById("input_add_name");
     var adultField = document.getElementById("input_add_adult");
 
