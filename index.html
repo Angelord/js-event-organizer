@@ -9,26 +9,26 @@
     <h1 align="center" id="title"> Event Organizer </h1>
     
     <div class="options">
-                <form action='JavaScript:removeEvent()' onsubmit='return validateRemoval()'>
-                    <h4>Remove Event:</h4>
-                    <label for='input_remove_id'>ID</label>                 <input type='text' name='id' id='input_remove_id'/>
-                    <input type='submit' value='Remove' class='submit_btn'/>
-                </form>
+            <form action='JavaScript:createEvent()' onsubmit='return validateCreation()'>
+                <h4> Add New Event:</h4>
+                <label for='input_add_name'>Name</label>            <input type='text' name='name' id='input_add_name'/>
+                <label for='input_add_adult'>Adult Only</label>     <input type='checkbox' name='adultOnly' id='input_add_adult'/>
+                <input type='submit' value='Add' class='submit_btn'/>
+            </form>
 
-                <form action='JavaScript:modifyEvent()' onsubmit='return validateModify()'>
-                    <h4> Modify Event:</h4>
-                    <label for='input_mod_id'>ID</label>                    <input type='text' name='id' id='input_mod_id'/>
-                    <label for='input_mod_name'>Name</label>                <input type='text' name='name' id='input_mod_name'/>
-                    <label for='input_mod_adult'>Adult Only</label>         <input type='checkbox' name='adultOnly' id='input_mod_adult'/>
-                    <input type='submit' value='Modify' class='submit_btn'/>
-                </form>
-
-                <form action='JavaScript:createEvent()' onsubmit='return validateCreation()'>
-                    <h4> Add New Event:</h4>
-                    <label for='input_add_name'>Name</label>            <input type='text' name='name' id='input_add_name'/>
-                    <label for='input_add_adult'>Adult Only</label>     <input type='checkbox' name='adultOnly' id='input_add_adult'/>
-                    <input type='submit' value='Add' class='submit_btn'/>
-                </form>
+            <form action='JavaScript:modifyEvent()' onsubmit='return validateModify()'>
+                <h4> Modify Event:</h4>
+                <label for='input_mod_id'>ID</label>                    <input type='text' name='id' id='input_mod_id'/>
+                <label for='input_mod_name'>Name</label>                <input type='text' name='name' id='input_mod_name'/>
+                <label for='input_mod_adult'>Adult Only</label>         <input type='checkbox' name='adultOnly' id='input_mod_adult'/>
+                <input type='submit' value='Modify' class='submit_btn'/>
+            </form>
+            
+            <form action='JavaScript:removeEvent()' onsubmit='return validateRemoval()'>
+                <h4>Remove Event:</h4>
+                <label for='input_remove_id'>ID</label>                 <input type='text' name='id' id='input_remove_id'/>
+                <input type='submit' value='Remove' class='submit_btn'/>
+            </form>
     </div>
     
     <table id="table_events">
@@ -37,7 +37,7 @@
     <script src="util.js"> </script>
     <script src="controller.js"></script>
     <script src="views.js"> </script>
-    <script src="main.js"> </script>
+    <script src="index.js"> </script>
 </body>
 
 </html>
