@@ -99,14 +99,14 @@ function addEvent() {
     var nameField = document.getElementById("input_add_name");
     var adultField = document.getElementById("input_add_adult");
 
-    new Event(nameField.value, adultField.checked);
-
+    controller.createEvent(nameField.value, adultField.checked);
     displayEvents();
 }
 
 function removeEvent() {
     var removeField = document.getElementById("input_remove_id");
-    delete events[removeField.value];
+
+    controller.removeEvent(removeField.value);
     displayEvents();
 }
 
