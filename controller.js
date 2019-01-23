@@ -7,6 +7,10 @@ var controller = {
         return (!isBlank(name));
     },
 
+    validateModify : function(id, name, adultOnly) {
+        return ((id in events) && this.validateCreation(name, adultOnly));
+    },
+
     validateRemoval : function(id) {
         return (id in events);
     },
@@ -18,7 +22,8 @@ var controller = {
     },
 
     modifyEvent : function(id, name, adultOnly) {
-
+        events[id].name = name;
+        events[id].adultOnly = adultOnly;
     }, 
 
     removeEvent : function(id) {

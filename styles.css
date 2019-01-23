@@ -22,7 +22,10 @@ div.options input, label {
 
 div.options input.submit_btn {
     width: 80%;
-    margin: 10%;
+    position: relative;
+    /* bottom: 5px; */
+    /* bottom: 10px; */
+    margin: 5% 10% 0% 10%;
 }
 
 table {
