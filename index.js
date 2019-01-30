@@ -6,9 +6,9 @@ ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
 ev.addClient(new Client("Georgi", "Ivanov", "male", 22));
 
 controller.createEvent("New Year's Party", true);
-displayEvents();
+redrawEvents();
 
-function displayEvents() {
+function redrawEvents() {
 
     var evTable = document.getElementById(TABLE_ID);
     evTable.innerHTML = "";
@@ -47,7 +47,9 @@ function fillEventTable(table) {
         } );
 
         table.appendChild(row);
+        console.log("Redrawing");
     }
+
 }
 
 function createElementWithText(elType, text) {
@@ -63,6 +65,14 @@ function validateCreation() {
     return controller.validateCreation(name, adultOnly);
 }
 
+function createEvent() {
+    var name = document.forms["createEvent"]["name"].value;
+    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
+
+    controller.createEvent(name, adultOnly);
+    redrawEvents();
+}
+
 function validateModify() {
     var id = document.forms["modifyEvent"]["id"].value;
     var name = document.forms["modifyEvent"]["name"].value;
@@ -71,34 +81,50 @@ function validateModify() {
     return controller.validateModify(id, name, adultOnly);
 }
 
-function validateRemoval() {
-    var id = document.forms["removeEvent"]["id"].value;
-    
-    return controller.validateRemoval(id);
-}
-
-function createEvent() {
-    var name = document.forms["createEvent"]["name"].value;
-    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
-
-    controller.createEvent(name, adultOnly);
-    displayEvents();
-}
-
 function modifyEvent() {
     var id = document.forms["modifyEvent"]["id"].value;
     var name = document.forms["modifyEvent"]["name"].value;
     var adultOnly = document.forms["modifyEvent"]["adultOnly"].value;
 
     controller.modifyEvent(id, name, adultOnly);
-    displayEvents();
+    redrawEvents();
+}
+
+function validateRemoval() {
+    var id = document.forms["removeEvent"]["id"].value;
+    
+    return controller.validateRemoval(id);
 }
 
 function removeEvent() {
     var id = document.forms["removeEvent"]["id"].value;
 
     var removedEv = controller.removeEvent(id);
-    displayEvents();
+    redrawEvents();
     alert("Removed event with name " + removedEv.name);
 }
+
+function validateAddClient() {
+    var evId = document.forms["addClient"]["eventId"].value;
+    var firstName = document.forms["addClient"]["firstName"].value;
+    var lastName = document.forms["addClient"]["lastName"].value;
+    var gender = document.forms["addClient"]["gender"].value;
+    var age = document.forms["addClient"]["age"].value;
+   
+    return controller.validateAddClient(evId, firstName, lastName, gender, age);
+}
+
+function addClient() {
+    var evId = document.forms["addClient"]["eventId"].value;
+    var firstName = document.forms["addClient"]["firstName"].value;
+    var lastName = document.forms["addClient"]["lastName"].value;
+    var gender = document.forms["addClient"]["gender"].value;
+    var age = document.forms["addClient"]["age"].value;
+
+    controller.addClient(evId, new Client(firstName, lastName, gender, age));
+
+    redrawEvents();
+}
+
+
 

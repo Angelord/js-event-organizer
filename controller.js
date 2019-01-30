@@ -15,6 +15,18 @@ var controller = {
         return (id in events);
     },
 
+    validateAddClient : function(id, fName, lName, gender, age) {
+        if(!(id in events)) { return false; }
+        if(strings.isBlank(fName) || strings.isBlank(lName) || strings.isBlank(gender)) { return false; }
+        if(isNaN(age)) { return false; }
+        if(events[id].adultOnly && age < 18) {
+            alert("The client is too young to attend."); 
+            return false; 
+        }
+
+        return true;
+    },
+
     createEvent : function(name, adultOnly) {
         var event = new Event(name, adultOnly);
         events[event.id] = event;
@@ -31,6 +43,10 @@ var controller = {
         var event = events[id];
         delete events[id];
         return event;
+    },
+
+    addClient : function(eventId, client) {
+        events[eventId].addClient(client);
     }
 }
 
