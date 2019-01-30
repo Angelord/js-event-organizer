@@ -31,22 +31,22 @@ div.options input.submit_btn {
 }
 
 div.table div.inner_row {
-    margin: 0% 2% 0% 12%;
-    width: 88%;
+    margin: 0% 0% 0% 12%;
+    width: 87.9%;
     height: 30px;
     clear: left;
     display: inline-block;
-    border: 1px solid #dddddd;
+    border: 1px solid gray;
 }
 
 div.table div.row {
     padding: 0px;
-    margin: 0% 2% 0% 2%;
+    margin: 0% 0% 0% 2%;
     width: 92%;
     height: 30px;
     clear: left;
     display: inline-block;
-    border: 1px solid #dddddd;
+    border: 1px solid gray;
 }
 
 div.table div.col {
@@ -59,11 +59,11 @@ div.table div.col {
 }
 
 div.row:hover {
-    background-color: #dddddd;
+    background-color: gray;
 }
 
 div.inner_row:hover {
-    background-color: #dddddd;
+    background-color: gray;
 }
 
 div.row div.col:nth-child(1) {
