@@ -26,9 +26,14 @@ function fillEventTable(table) {
 
         idEl.className = nameEl.className = adultOnly.className = "col";
 
+        
+        var innerRow = document.createElement("div");
+        innerRow.className = "inner_row";
+        
         row.appendChild(idEl);
         row.appendChild(nameEl);
         row.appendChild(adultOnly);
+        row.appendChild(innerRow);
 
         table.appendChild(row);
     }

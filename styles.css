@@ -30,6 +30,17 @@ div.options input.submit_btn {
     margin: 5% 10% 0% 10%;
 }
 
+div.table div.inner_row {
+    padding-left: 20%;
+    margin: 0% 2% 0% 2%;
+    width: 70%;
+    height: 30px;
+    /* float: right; */
+    clear: left;
+    display: inline-block;
+    border: 1px solid #dddddd;
+}
+
 div.table div.row {
     padding: 0px;
     margin: 0% 2% 0% 2%;
