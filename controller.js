@@ -39,13 +39,17 @@ function Event(name, adultOnly) {
     this.id = idGenerator.next();
     this.name = name;
     this.adultOnly = adultOnly;  
+    this.clients = [];
+    this.addClient = function (client) {
+        this.clients.push(client);
+    };
 }
 
 function Client(firstName, lastName, gender, age) {
     this.firstName = firstName;
     this.lastName = lastName;
-    this.getFullName = function() { return this.firstName + " " + this.lastName; };
     this.gender = gender;
     this.age = age;
+    this.getFullName = function() { return this.firstName + " " + this.lastName; };
 }
 

@@ -1,7 +1,10 @@
 
 var TABLE_ID = "table_events";
 
-controller.createEvent("Wedding", false);
+var ev = controller.createEvent("Wedding", false);
+ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
+ev.addClient(new Client("Georgi", "Ivanov", "male", 22));
+
 controller.createEvent("New Year's Party", true);
 displayEvents();
 
@@ -25,15 +28,23 @@ function fillEventTable(table) {
         var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "");
 
         idEl.className = nameEl.className = adultOnly.className = "col";
-
-        
-        var innerRow = document.createElement("div");
-        innerRow.className = "inner_row";
         
         row.appendChild(idEl);
         row.appendChild(nameEl);
         row.appendChild(adultOnly);
-        row.appendChild(innerRow);
+        
+        CollectionUtil.forEach(event.clients, function (client, index) {
+            var innerRow = document.createElement("div");
+            innerRow.className = "inner_row";
+            var cIdEl = createElementWithText("div", index);
+            var clNameEl = createElementWithText("div", client.getFullName());
+
+            cIdEl.className = clNameEl.className = "col";
+
+            innerRow.appendChild(cIdEl);
+            innerRow.appendChild(clNameEl);
+            row.appendChild(innerRow);
+        } );
 
         table.appendChild(row);
     }
