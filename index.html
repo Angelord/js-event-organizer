@@ -9,26 +9,35 @@
     <h1 align="center" id="title"> Event Organizer </h1>
     
     <div class="options">
-            <form action='JavaScript:createEvent()' onsubmit='return validateCreation()'>
+            <form name="createEvent" action='JavaScript:createEvent()' onsubmit='return validateCreation()'>
                 <h4> Add New Event:</h4>
-                <label>Name</label>            <input type='text' name='name' id='input_add_name'/>
-                <label>Adult Only</label>     <input type='checkbox' name='adultOnly' id='input_add_adult'/>
+                <label>Name</label>           <input type='text' name='name'/>
+                <label>Adult Only</label>     <input type='checkbox' name='adultOnly'/>
                 <input type='submit' value='Add' class='submit_btn'/>
             </form>
 
-            <form action='JavaScript:modifyEvent()' onsubmit='return validateModify()'>
+            <form name="modifyEvent" action='JavaScript:modifyEvent()' onsubmit='return validateModify()'>
                 <h4> Modify Event:</h4>
-                <label>ID</label>                           <input type='text' name='id' id='input_mod_id'/>
-                <label>Name</label>                         <input type='text' name='name' id='input_mod_name'/>
-                <label>Adult Only</label>                   <input type='checkbox' name='adultOnly' id='input_mod_adult'/>
+                <label>ID</label>                           <input type='text' name='id' />
+                <label>Name</label>                         <input type='text' name='name' />
+                <label>Adult Only</label>                   <input type='checkbox' name='adultOnly' />
                 <input type='submit' value='Modify' class='submit_btn'/>
             </form>
             
-            <form action='JavaScript:removeEvent()' onsubmit='return validateRemoval()'>
+            <form name="removeEvent" action='JavaScript:removeEvent()' onsubmit='return validateRemoval()'>
                 <h4>Remove Event:</h4>
-                <label>ID</label>                 <input type='text' name='id' id='input_remove_id'/>
+                <label>ID</label>                 <input type='text' name='id'/>
                 <input type='submit' value='Remove' class='submit_btn'/>
             </form>
+
+            <!-- <form action='JavaScript:addClient()' onsubmit='return validateModify()'>
+                <h4> Modify Event:</h4>
+                <label>First Name</label>                       <input type='text' name='fname' id='input_mod_id'/>
+                <label>Last Name</label>                        <input type='text' name='lname' id='input_mod_name'/>
+                <label>Gender</label>                           <input type='text' name='gender' id='input_mod_adult'/>
+                <label>Age</label>                              <input type='checkbox' name='age' id='input_mod_adult'/>
+                <input type='submit' value='Modify' class='submit_btn'/>
+            </form> -->
     </div>
     
     <div class="table" id="table_events">

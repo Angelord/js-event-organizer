@@ -57,47 +57,47 @@ function createElementWithText(elType, text) {
 }
 
 function validateCreation() {
-    var nameField = document.getElementById("input_add_name");
-    var adultField = document.getElementById("input_add_adult");
+    var name = document.forms["createEvent"]["name"].value;
+    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
 
-    return controller.validateCreation(nameField.value, adultField.value);
+    return controller.validateCreation(name, adultOnly);
 }
 
 function validateModify() {
-    var idField = document.getElementById("input_mod_id");
-    var nameField = document.getElementById("input_mod_name");
-    var adultField = document.getElementById("input_mod_adult");
+    var id = document.forms["modifyEvent"]["id"].value;
+    var name = document.forms["modifyEvent"]["name"].value;
+    var adultOnly = document.forms["modifyEvent"]["adultOnly"].value;
 
-    return controller.validateModify(idField.value, nameField.value, adultField.checked);
+    return controller.validateModify(id, name, adultOnly);
 }
 
 function validateRemoval() {
-    var removeField = document.getElementById("input_remove_id");
+    var id = document.forms["removeEvent"]["id"].value;
     
-    return controller.validateRemoval(removeField.value);
+    return controller.validateRemoval(id);
 }
 
 function createEvent() {
-    var nameField = document.getElementById("input_add_name");
-    var adultField = document.getElementById("input_add_adult");
+    var name = document.forms["createEvent"]["name"].value;
+    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
 
-    controller.createEvent(nameField.value, adultField.checked);
+    controller.createEvent(name, adultOnly);
     displayEvents();
 }
 
 function modifyEvent() {
-    var idField = document.getElementById("input_mod_id");
-    var nameField = document.getElementById("input_mod_name");
-    var adultField = document.getElementById("input_mod_adult");
+    var id = document.forms["modifyEvent"]["id"].value;
+    var name = document.forms["modifyEvent"]["name"].value;
+    var adultOnly = document.forms["modifyEvent"]["adultOnly"].value;
 
-    controller.modifyEvent(idField.value, nameField.value, adultField.checked);
+    controller.modifyEvent(id, name, adultOnly);
     displayEvents();
 }
 
 function removeEvent() {
-    var removeField = document.getElementById("input_remove_id");
+    var id = document.forms["removeEvent"]["id"].value;
 
-    var removedEv = controller.removeEvent(removeField.value);
+    var removedEv = controller.removeEvent(id);
     displayEvents();
     alert("Removed event with name " + removedEv.name);
 }
