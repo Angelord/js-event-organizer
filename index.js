@@ -28,6 +28,8 @@ function populate() {
     data.addClientToEvent(client3.id, ev1.id);
 
     data.addClientToEvent(client1.id, ev2.id);
+
+    controller.archiveEvent(ev1.id);
 }
 
 function redraw() {
