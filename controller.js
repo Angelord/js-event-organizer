@@ -19,20 +19,22 @@ var defaultController = {
     modifyEvent : function(id, name, adultOnly, price) {
         if(!(id in data.getEvents())) { return; }
 
+        var event = data.getEvent(id);
+
         if(!strings.isBlank(name)) {
-            data.getEvents()[id].name = name;
+            event.name = name;
         }
 
-        data.getEvents()[id].adultOnly = adultOnly;
+        event.adultOnly = adultOnly;
         
         if(!isNaN(price)) { 
-            data.getEvents()[id].price = price;
+            event.price = price;
         }
 
-        return data.getEvents()[id];
+        return event;
     }, 
 
-    removeEvent : function(id) {
+    removeEvent : function() {
         var id = document.forms["removeEvent"]["id"].value;
 
         if(id in data.getEvents()) {

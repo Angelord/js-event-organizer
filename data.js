@@ -18,13 +18,17 @@ function Data() {
         return events;
     };
 
+    this.getEvent = function(eventId) {
+        return events[eventId];
+    };
+
     this.addClientToEvent = function(eventId, client) {
         events[eventId].addClient(client);
-    }
+    };
 
     this.removeClientFromEvent = function(eventId, clientIndex) {
         events[eventId].removeClient(clientIndex);
-    }
+    };
 }
 
 function Event(name, date, adultOnly, price) {
