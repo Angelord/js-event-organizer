@@ -3,7 +3,7 @@
     font-family: 'Courier New', Courier, monospace;
 }
 
-div.options form {
+div.options .option_menu {
     float: left;
     clear: right;
     border: 1px solid gray;
