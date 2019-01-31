@@ -181,13 +181,6 @@ function createElementWithText(elType, text, elClass) {
     return element;
 }
 
-function validateCreation() {
-    var name = document.forms["createEvent"]["name"].value;
-    var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
-
-    return controller.validateCreation(name, adultOnly);
-}
-
 function createEvent() {
     var name = document.forms["createEvent"]["name"].value;
     var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
@@ -195,14 +188,6 @@ function createEvent() {
 
     controller.createEvent(name, adultOnly, price);
     redrawEvents();
-}
-
-function validateModify() {
-    var id = document.forms["modifyEvent"]["id"].value;
-    var name = document.forms["modifyEvent"]["name"].value;
-    var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
-
-    return controller.validateModify(id, name, adultOnly);
 }
 
 function modifyEvent() {
@@ -215,28 +200,11 @@ function modifyEvent() {
     redrawEvents();
 }
 
-function validateRemoval() {
-    var id = document.forms["removeEvent"]["id"].value;
-    
-    return controller.validateRemoval(id);
-}
-
 function removeEvent() {
     var id = document.forms["removeEvent"]["id"].value;
 
     var removedEv = controller.removeEvent(id);
     redrawEvents();
-    alert("Removed event with name " + removedEv.name);
-}
-
-function validateAddClient() {
-    var evId = document.forms["addClient"]["eventId"].value;
-    var firstName = document.forms["addClient"]["firstName"].value;
-    var lastName = document.forms["addClient"]["lastName"].value;
-    var gender = document.forms["addClient"]["gender"].value;
-    var age = document.forms["addClient"]["age"].value;
-   
-    return controller.validateAddClient(evId, firstName, lastName, gender, age);
 }
 
 function addClient() {
@@ -246,8 +214,7 @@ function addClient() {
     var gender = document.forms["addClient"]["gender"].value;
     var age = document.forms["addClient"]["age"].value;
 
-    controller.addClient(evId, new Client(firstName, lastName, gender, age));
-
+    controller.addClient(evId, firstName, lastName, gender, age);
     redrawEvents();
 }
 

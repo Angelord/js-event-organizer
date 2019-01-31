@@ -5,38 +5,20 @@ var events = {};
 
 var defaultController = {
 
-    validateCreation : function(name, adultOnly) {
-        return (!strings.isBlank(name));
-    },
-
-    validateModify : function(id, name, adultOnly) {
-        return (id in events);
-    },
-
-    validateRemoval : function(id) {
-        return (id in events);
-    },
-
-    validateAddClient : function(id, fName, lName, gender, age) {
-        if(!(id in events)) { return false; }
-        if(strings.isBlank(fName) || strings.isBlank(lName) || strings.isBlank(gender)) { return false; }
-        if(isNaN(age)) { return false; }
-        if(events[id].adultOnly && age < 18) {
-            alert("The client is too young to attend."); 
-            return false; 
-        }
-
-        return true;
-    },
-
     createEvent : function(name, adultOnly, price) {
+        if(strings.isBlank(name)) { return; }
 
-        var event = new Event(name, new Date(), adultOnly, price);
+        var priceRef = price;
+        if(strings.isBlank(price) || isNaN(price)) { priceRef = 0; }
+
+        var event = new Event(name, new Date(), adultOnly, priceRef);
         events[event.id] = event;
         return event;
     },
 
     modifyEvent : function(id, name, adultOnly, price) {
+        if(!(id in events)) { return; }
+
         if(!strings.isBlank(name)) {
             events[id].name = name;
         }
@@ -51,13 +33,23 @@ var defaultController = {
     }, 
 
     removeEvent : function(id) {
-        var event = events[id];
-        delete events[id];
-        return event;
+        if(id in events) {
+            var event = events[id];
+            delete events[id];
+            alert("Removed event with name " + event.name);
+        }
     },
 
-    addClient : function(eventId, client) {
-        events[eventId].addClient(client);
+    addClient : function(eventId, fname, lname, gender, age) {
+        if(!(eventId in events)) { return; }
+        if(strings.isBlank(fname) || strings.isBlank(lname) || strings.isBlank(gender)) { return; }
+        if(isNaN(age)) { return; }
+        if(events[eventId].adultOnly && age < 18) {
+            alert("The client is too young to attend."); 
+            return; 
+        }
+
+        events[eventId].addClient(new Client(fname, lname, gender, age));
     },
 
     removeClient : function(eventId, clientIndex) {
@@ -71,31 +63,29 @@ var defaultController = {
 
 var lockedController = {
 
-    validateCreation : function(name, adultOnly) { 
+    createEvent : function() {
         alert(LOCKED_MSG);
         return false; 
     },
 
-    validateModify : function(id, name, adultOnly) {
+    modifyEvent : function() {
         alert(LOCKED_MSG);
         return false; 
     },
 
-    validateRemoval : function(id) { 
+    removeEvent : function() {
         alert(LOCKED_MSG);
         return false; 
     },
 
-    validateAddClient : function(id, fName, lName, gender, age) { 
+    addClient : function() {
         alert(LOCKED_MSG);
         return false
     },
-
-    createEvent : function() {},
-    modifyEvent : function() {},
-    removeEvent : function() {},
-    addClient : function() {},
-    removeClient : function() {},
+    removeClient : function() {
+        alert(LOCKED_MSG);
+        return false
+    },
 
     lock : function() { },
     unlock : function() { controller = defaultController; }

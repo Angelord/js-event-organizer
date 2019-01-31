@@ -9,7 +9,7 @@
     <h1 align="center" id="title"> Event Organizer </h1>
     
     <div class="options">
-            <form class="option_menu" name="createEvent" action='JavaScript:createEvent()' onsubmit='return validateCreation()'>
+            <form class="option_menu" name="createEvent" action='JavaScript:createEvent()' >
                 <h4> Add New Event:</h4>
                 <label>Name</label>           <input type='text' name='name'/>
                 <label>Adult Only</label>     <input type='checkbox' name='adultOnly'/>
@@ -17,7 +17,7 @@
                 <input type='submit' value='Add' class='submit_btn'/>
             </form>
 
-            <form class="option_menu" name="modifyEvent" action='JavaScript:modifyEvent()' onsubmit='return validateModify()'>
+            <form class="option_menu" name="modifyEvent" action='JavaScript:modifyEvent()'>
                 <h4> Modify Event:</h4>
                 <label>ID</label>                           <input type='text' name='id' />
                 <label>Name</label>                         <input type='text' name='name' />
@@ -26,13 +26,13 @@
                 <input type='submit' value='Modify' class='submit_btn'/>
             </form>
             
-            <form class="option_menu" name="removeEvent" action='JavaScript:removeEvent()' onsubmit='return validateRemoval()'>
+            <form class="option_menu" name="removeEvent" action='JavaScript:removeEvent()'>
                 <h4>Remove Event:</h4>
                 <label>ID</label>                 <input type='text' name='id'/>
                 <input type='submit' value='Remove' class='submit_btn'/>
             </form>
 
-            <form class="option_menu" name="addClient" action='JavaScript:addClient()' onsubmit='return validateAddClient()'>
+            <form class="option_menu" name="addClient" action='JavaScript:addClient()'>
                 <h4> Add Client:</h4>
                 <label>Event ID</label>                               <input type='text' name='eventId' />
                 <label>First Name</label>                             <input type='text' name='firstName' />
