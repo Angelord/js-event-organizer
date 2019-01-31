@@ -58,6 +58,9 @@ function fillClientTable(table) {
 function fillEventTable(table) {
     
     var filteredEvents = filterer.filterEvents(data.getEvents());
+
+    table.appendChild(createEventHeader());
+
     for(var key in filteredEvents) {
         var event = filteredEvents[key];
 
@@ -133,6 +136,29 @@ function createClientRow(client, innerRow, eventId) {
     row.appendChild(walletEl);
     row.appendChild(deleteBtn);
     
+    return row;
+}
+
+
+function createEventHeader() {
+    var row = HtmlUtil.createElementWithClass("div", "row");
+    
+    var idEl = HtmlUtil.createElementWithText("div", "ID", "col");
+    var nameEl = HtmlUtil.createElementWithText("div", "Name", "col");
+    var dateEl = HtmlUtil.createElementWithText("div", "Date", "col");
+    var adultOnly = HtmlUtil.createElementWithText("div", "Age", "col");
+    var price = HtmlUtil.createElementWithText("div", "Price", "col");
+    var rating = HtmlUtil.createElementWithText("div", "Rating", "col");
+    var button = HtmlUtil.createElementWithClass("div", "col");
+    
+    row.appendChild(idEl);
+    row.appendChild(nameEl);
+    row.appendChild(dateEl);
+    row.appendChild(adultOnly);
+    row.appendChild(price);
+    row.appendChild(rating);
+    row.appendChild(button);
+
     return row;
 }
 
