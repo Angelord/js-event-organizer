@@ -10,7 +10,7 @@ var defaultController = {
     },
 
     validateModify : function(id, name, adultOnly) {
-        return ((id in events) && this.validateCreation(name, adultOnly));
+        return (id in events);
     },
 
     validateRemoval : function(id) {
@@ -29,15 +29,24 @@ var defaultController = {
         return true;
     },
 
-    createEvent : function(name, adultOnly) {
-        var event = new Event(name, new Date(), adultOnly);
+    createEvent : function(name, adultOnly, price) {
+
+        var event = new Event(name, new Date(), adultOnly, price);
         events[event.id] = event;
         return event;
     },
 
-    modifyEvent : function(id, name, adultOnly) {
-        events[id].name = name;
+    modifyEvent : function(id, name, adultOnly, price) {
+        if(!strings.isBlank(name)) {
+            events[id].name = name;
+        }
+
         events[id].adultOnly = adultOnly;
+        
+        if(!isNaN(price)) { 
+            events[id].price = price;
+        }
+
         return events[id];
     }, 
 
@@ -95,11 +104,12 @@ var lockedController = {
 var controller = defaultController;
 
 
-function Event(name, date, adultOnly) {
+function Event(name, date, adultOnly, price) {
 
     this.id = idGenerator.next();
     this.name = name;
     this.adultOnly = adultOnly;  
+    this.price = (price ? price : 0); 
     this.clients = [];
 
     this.addClient = function (client) {

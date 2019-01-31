@@ -113,11 +113,13 @@ function fillEventTable(table) {
         var nameEl = createElementWithText("div", nameDisplay, "col");
         var dateEl = createElementWithText("div", event.getDate(), "col");
         var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "", "col");
+        var price = createElementWithText("div", event.price, "col");
         
         row.appendChild(idEl);
         row.appendChild(nameEl);
         row.appendChild(dateEl);
         row.appendChild(adultOnly);
+        row.appendChild(price);
 
         var filteredClients = filterer.filterClients(event.clients);
 
@@ -181,23 +183,24 @@ function createElementWithText(elType, text, elClass) {
 
 function validateCreation() {
     var name = document.forms["createEvent"]["name"].value;
-    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
+    var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
 
     return controller.validateCreation(name, adultOnly);
 }
 
 function createEvent() {
     var name = document.forms["createEvent"]["name"].value;
-    var adultOnly = document.forms["createEvent"]["adultOnly"].value;
+    var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
+    var price = document.forms["createEvent"]["price"].value;
 
-    controller.createEvent(name, adultOnly);
+    controller.createEvent(name, adultOnly, price);
     redrawEvents();
 }
 
 function validateModify() {
     var id = document.forms["modifyEvent"]["id"].value;
     var name = document.forms["modifyEvent"]["name"].value;
-    var adultOnly = document.forms["modifyEvent"]["adultOnly"].value;
+    var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
 
     return controller.validateModify(id, name, adultOnly);
 }
@@ -205,9 +208,10 @@ function validateModify() {
 function modifyEvent() {
     var id = document.forms["modifyEvent"]["id"].value;
     var name = document.forms["modifyEvent"]["name"].value;
-    var adultOnly = document.forms["modifyEvent"]["adultOnly"].value;
+    var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
+    var price = document.forms["modifyEvent"]["price"].value;
 
-    controller.modifyEvent(id, name, adultOnly);
+    controller.modifyEvent(id, name, adultOnly, price);
     redrawEvents();
 }
 
