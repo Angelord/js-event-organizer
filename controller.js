@@ -150,6 +150,7 @@ var defaultController = {
         }
 
         event.rate(clientId, rating);
+        redraw();
     },
 
     lock : function() { controller = lockedController; },

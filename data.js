@@ -43,6 +43,10 @@ function Event(name, date, adultOnly, price) {
     var price = (price ? parseInt(price) : 0); 
     var ratings = {};
 
+    this.isRated = function() {
+        return (Object.keys(ratings).length != 0);
+    };
+
     this.getRating = function() { 
         var totalRating = 0;
         for(var key in ratings) {

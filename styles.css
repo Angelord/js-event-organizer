@@ -49,16 +49,32 @@ div.table div.row {
     border: 1px solid lightgray;
 }
 
-div.table div.col {
+div.row div.col {
     font-family: 'Courier New', Courier, monospace;
-    width: 20%;
+    width: 12%;
     height: 100%;
     float: left;
     text-align: left;
     line-height: 30px;
 }
 
-.col button {
+div.row div.col_btn {
+    font-family: 'Courier New', Courier, monospace;
+    height: 100%;
+    width: 90px;
+    float: right;
+}
+
+div.row div.col:nth-child(2) {
+    width: 30%;
+}
+
+div.row div.col:nth-child(1) {
+    width: 5%;
+    text-align: center;
+}
+
+.col_btn button {
     border: 1px solid gray;
     margin: 0;
     padding: 0;
@@ -67,7 +83,7 @@ div.table div.col {
     background-color: whitesmoke;
 }
 
-.col button:hover {
+.col_btn button:hover {
     background-color: gray;
 }
 
@@ -79,18 +95,5 @@ div.inner_row:hover {
     background-color: lightgray;
 }
 
-div.row div.col:nth-child(1) {
-    width: 5%;
-    text-align: center;
-}
 
-div.row div.col:last-child {
-    width: 12%;
-    float: right;
-}
-
-div.inner_row div.col:last-child {
-    width: 12%;
-    float: right;
-}
 
