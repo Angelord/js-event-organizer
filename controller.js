@@ -3,17 +3,19 @@ var LOCKED_MSG = "System locked. Unable to perform aciton";
 
 var defaultController = {
 
-    createEvent : function(name, adultOnly, price) {
+    createEvent : function() {
+        var name = document.forms["createEvent"]["name"].value;
+        var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
+        var price = document.forms["createEvent"]["price"].value;
+
         if(strings.isBlank(name)) { return; }
+        if(strings.isBlank(price) || isNaN(price)) { price = 0; }
 
-        var priceRef = price;
-        if(strings.isBlank(price) || isNaN(price)) { priceRef = 0; }
-
-        var event = new Event(name, new Date(), adultOnly, priceRef);
+        var event = new Event(name, new Date(), adultOnly, price);
 
         data.addEvent(event);
-        
-        return event;
+
+        redrawEvents();
     },
 
     modifyEvent : function(id, name, adultOnly, price) {

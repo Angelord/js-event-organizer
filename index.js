@@ -8,13 +8,15 @@ populate();
 redrawEvents();
 
 function populate() {
-    var ev = controller.createEvent("Wedding", false);
+    var ev = new Event("Wedding", new Date(), false, 0);
+    data.addEvent(ev);
     if(ev) {
         ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
         ev.addClient(new Client("Mariq", "Ivanova", "female", 22));
     }
 
-    var ev = controller.createEvent("New Year's Party", true);
+    var ev = new Event("New Year's Party", new Date(), true, 100);
+    data.addEvent(ev);
     if(ev) {
         ev.addClient(new Client("Georgi", "Gechev", "male", 28));
     }
@@ -93,15 +95,6 @@ function createClientHeader() {
     headerRow.appendChild(deleteBtn);
 
     return headerRow;
-}
-
-function createEvent() {
-    var name = document.forms["createEvent"]["name"].value;
-    var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
-    var price = document.forms["createEvent"]["price"].value;
-
-    controller.createEvent(name, adultOnly, price);
-    redrawEvents();
 }
 
 function modifyEvent() {
