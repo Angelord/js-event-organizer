@@ -30,6 +30,10 @@ function fillEventTable(table) {
         row.appendChild(idEl);
         row.appendChild(nameEl);
         row.appendChild(adultOnly);
+
+        if(event.clients.length > 0) {
+            row.appendChild(createClientHeader());
+        }
         
         CollectionUtil.forEach(event.clients, function (client, index) {
 
@@ -52,6 +56,23 @@ function fillEventTable(table) {
 
         table.appendChild(row);
     }
+}
+
+function createClientHeader() {
+    var headerRow = createElementWithClass("div", "inner_row");
+    var id = createElementWithText("div", "ID", "col");
+    var name = createElementWithText("div", "Name", "col");
+    var gender = createElementWithText("div", "Gender", "col");
+    var age = createElementWithText("div", "Age", "col");
+    var deleteBtn = createElementWithClass("div", "col");
+
+    headerRow.appendChild(id);
+    headerRow.appendChild(name);
+    headerRow.appendChild(gender);
+    headerRow.appendChild(age);
+    headerRow.appendChild(deleteBtn);
+
+    return headerRow;
 }
 
 function createElementWithClass(elType, elClass) {
