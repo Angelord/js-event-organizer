@@ -1,11 +1,21 @@
 
 var TABLE_ID = "table_events";
 
+var filters = {
+    None : 0,
+    Male_Only : 1,
+    Female_Only: 2,
+    current : this.None
+};
+
 var ev = controller.createEvent("Wedding", false);
 ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
 ev.addClient(new Client("Georgi", "Ivanov", "male", 22));
 
 controller.createEvent("New Year's Party", true);
+
+
+
 redrawEvents();
 
 function redrawEvents() {
@@ -36,6 +46,8 @@ function fillEventTable(table) {
         }
         
         CollectionUtil.forEach(event.clients, function (client, index) {
+            if(filters.current == filters.Male_Only && client.gender != "male") { return; }
+            if(filters.current == filters.Female_Only && client.gender != "female") { return; }
 
             var innerRow = document.createElement("div");
             innerRow.className = "inner_row";
