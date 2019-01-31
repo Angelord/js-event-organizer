@@ -41,13 +41,16 @@
             </form>
 
             <div class="option_menu">
-                    <h4>Filters</h4>
-                    <label>Type</label>
+                    <h4>Utility</h4>
+                    <label>Filter</label>
                     <select id="filterSelect" onchange="filterer.changeFilter()">
                             <option value="0">None</option>
                             <option value="1">Male Only</option>
                             <option value="2">Female Only</option>
-                    </select>
+                    </select> <br>
+                    <button onclick="controller.lock()">Lock System</button>
+                    <button onclick="controller.unlock()">Unlock System</button>
+
             </div>
     </div>
     

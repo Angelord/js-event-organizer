@@ -31,8 +31,10 @@ function Filterer() {
 }
 
 var ev = controller.createEvent("Wedding", false);
-ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
-ev.addClient(new Client("Mariq", "Ivanova", "female", 22));
+if(ev) {
+    ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
+    ev.addClient(new Client("Mariq", "Ivanova", "female", 22));
+}
 
 controller.createEvent("New Year's Party", true);
 

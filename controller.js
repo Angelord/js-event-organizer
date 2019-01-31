@@ -1,7 +1,9 @@
 
+var LOCKED_MSG = "System locked. Unable to perform aciton";
+
 var events = {};
 
-var controller = {
+var defaultController = {
 
     validateCreation : function(name, adultOnly) {
         return (!strings.isBlank(name));
@@ -52,8 +54,46 @@ var controller = {
     removeClient : function(eventId, clientIndex) {
         delete events[eventId].clients.splice(clientIndex, 1);
         redrawEvents();
-    }
+    },
+
+    lock : function() { controller = lockedController; },
+    unlock : function() { }
 }
+
+var lockedController = {
+
+    validateCreation : function(name, adultOnly) { 
+        alert(LOCKED_MSG);
+        return false; 
+    },
+
+    validateModify : function(id, name, adultOnly) {
+        alert(LOCKED_MSG);
+        return false; 
+    },
+
+    validateRemoval : function(id) { 
+        alert(LOCKED_MSG);
+        return false; 
+    },
+
+    validateAddClient : function(id, fName, lName, gender, age) { 
+        alert(LOCKED_MSG);
+        return false
+    },
+
+    createEvent : function() {},
+    modifyEvent : function() {},
+    removeEvent : function() {},
+    addClient : function() {},
+    removeClient : function() {},
+
+    lock : function() { },
+    unlock : function() { controller = defaultController; }
+}
+
+var controller = defaultController;
+
 
 function Event(name, adultOnly) {
 
