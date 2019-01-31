@@ -109,7 +109,8 @@ function fillEventTable(table) {
         row.className = "row";
 
         var idEl = createElementWithText("div", event.id, "col");
-        var nameEl = createElementWithText("div", event.name, "col");
+        var nameDisplay = (event.adultOnly ? "*" : "#") + event.name;
+        var nameEl = createElementWithText("div", nameDisplay, "col");
         var dateEl = createElementWithText("div", event.getDate(), "col");
         var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "", "col");
         
