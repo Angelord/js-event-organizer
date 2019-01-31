@@ -63,17 +63,23 @@ function fillEventTable(table) {
         row.className = "row";
 
         var idEl = HtmlUtil.createElementWithText("div", event.id, "col");
-        var nameDisplay = (event.price > 0 ? "$" : "!") + " " + (event.adultOnly ? "*" : "#") + " " + event.name;
+        var nameDisplay = (event.archived ? "~" : "") + (event.price > 0 ? "$" : "!") + " " + (event.adultOnly ? "*" : "#") + " " + event.name;
         var nameEl = HtmlUtil.createElementWithText("div", nameDisplay, "col");
         var dateEl = HtmlUtil.createElementWithText("div", event.getDate(), "col");
         var adultOnly = HtmlUtil.createElementWithText("div", event.adultOnly ? "+18" : "", "col");
         var price = HtmlUtil.createElementWithText("div", event.getPrice(), "col");
-        
+
         row.appendChild(idEl);
         row.appendChild(nameEl);
         row.appendChild(dateEl);
         row.appendChild(adultOnly);
         row.appendChild(price);
+
+        if(!event.archived) {
+            var archiveBtn = HtmlUtil.createElementWithClass("div", "col");
+            archiveBtn.innerHTML = ("<button onclick=\"controller.archiveEvent('" + event.id + "')\">Archive</button>");
+            row.appendChild(archiveBtn);
+        }
 
         var filteredClients = filterer.filterClients(event.clients);
 

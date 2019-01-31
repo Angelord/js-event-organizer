@@ -85,12 +85,12 @@ div.row div.col:nth-child(1) {
 }
 
 div.row div.col:last-child {
-    width: 15%;
+    width: 12%;
     float: right;
 }
 
 div.inner_row div.col:last-child {
-    width: 15%;
+    width: 12%;
     float: right;
 }
 

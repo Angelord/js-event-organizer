@@ -84,6 +84,11 @@ var defaultController = {
         var client = data.getClient(clientId);
         var event = data.getEvent(eventId);
 
+        if(event.archived) {
+            alert("Event is archived");
+            return;
+        }
+
         if(event.adultOnly && client.age < 18) {
             alert("The client is too young to attend."); 
             return; 
@@ -102,6 +107,15 @@ var defaultController = {
     removeClientFromEvent : function(clientId, eventId) {
 
         data.removeClientFromEvent(clientId, eventId);
+
+        redraw();
+    },
+
+    archiveEvent : function(eventId) {
+        if(!(eventId in data.getEvents())) { return; }
+
+        var event = data.getEvent(eventId);
+        event.archived = true;
 
         redraw();
     },

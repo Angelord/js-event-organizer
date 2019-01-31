@@ -36,6 +36,7 @@ function Data() {
 function Event(name, date, adultOnly, price) {
 
     this.id = idGenerator.next();
+    this.archived = false;
     this.name = name;
     this.adultOnly = adultOnly;  
     this.clients = [];
