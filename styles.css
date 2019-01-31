@@ -49,6 +49,10 @@ div.table div.inner_row {
     border: 1px solid lightgray;
 }
 
+div.table div.row:first-child {
+    background-color: lightgray;
+}
+
 div.table div.row {
     padding: 0px;
     margin: 0% 0% 0% 2%;
