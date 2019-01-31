@@ -39,3 +39,18 @@ var CollectionUtil = {
         return mappedColl;
     }
 };
+
+var ObjectUtil = {
+    filter : function(object, predicate) {
+        
+        var filteredObj = {};
+        
+        for(var key in object) {
+            if(predicate(object[key])) {
+                filteredObj[key] = object[key];
+            }
+        }
+        
+        return filteredObj;
+    }
+};

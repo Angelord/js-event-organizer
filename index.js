@@ -9,7 +9,8 @@ function Filterer() {
         None : 0,
         Male_Only : 1,
         Female_Only : 2,
-        Most_Clients : 3
+        Most_Clients : 3,
+        Children_Allowed : 4
     };
     
     var curFilter = FILTER_TYPE.None;
@@ -21,7 +22,7 @@ function Filterer() {
         return true;
     };
 
-    var filterByMostClients = function(events) {
+    var getEventsWithMostClients = function(events) {
         var mostClients = [];
 
         for(var key in events) {
@@ -40,7 +41,13 @@ function Filterer() {
         } 
 
         return mostClients;
-    } 
+    };
+
+    var getChildFriendlyEvents = function(events) {
+        return ObjectUtil.filter( events, function(event) {
+            return !event.adultOnly;
+        });
+    };
 
     this.filterClients = function(clients) {
         return CollectionUtil.filter(clients, filterClient);
@@ -53,7 +60,10 @@ function Filterer() {
         }
 
         if(curFilter == FILTER_TYPE.Most_Clients) {
-            return filterByMostClients(events);
+            return getEventsWithMostClients(events);
+        }
+        else if(curFilter == FILTER_TYPE.Children_Allowed) {
+            return getChildFriendlyEvents(events);
         }
 
         return events;
@@ -74,6 +84,11 @@ function populate() {
     if(ev) {
         ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
         ev.addClient(new Client("Mariq", "Ivanova", "female", 22));
+    }
+
+    var ev = controller.createEvent("New Year's Party", true);
+    if(ev) {
+        ev.addClient(new Client("Georgi", "Gechev", "male", 28));
     }
 }
 
