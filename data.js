@@ -40,7 +40,7 @@ function Event(name, date, adultOnly, price) {
     };
 
     this.removeClient = function(clientIndex) {
-        clients.splice(clientIndex, 1);
+        this.clients.splice(clientIndex, 1);
     };
 
     this.numClients = function() {

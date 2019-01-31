@@ -3,77 +3,7 @@ var TABLE_ID = "table_events";
 
 var filterer = new Filterer();
 
-function Filterer() {
-    
-    var FILTER_TYPE = {
-        None : 0,
-        Male_Only : 1,
-        Female_Only : 2,
-        Most_Clients : 3,
-        Children_Allowed : 4
-    };
-    
-    var curFilter = FILTER_TYPE.None;
 
-    var filterClient = function(client) {
-        if(curFilter == FILTER_TYPE.Male_Only && client.gender != "male") { return false; }
-        if(curFilter == FILTER_TYPE.Female_Only && client.gender != "female") { return false; }
-
-        return true;
-    };
-
-    var getEventsWithMostClients = function(events) {
-        var mostClients = [];
-
-        for(var key in events) {
-            if(mostClients.length == 0 || events[key].numClients() > mostClients[0].numClients()) {
-                mostClients = [];
-                mostClients.push(events[key]);
-            }
-            else if(events[key].numClients() == mostClients[0].numClients()) {
-                mostClients.push(events[key]);
-            }
-        }
-
-        if(mostClients[0].numClients() == 0) {
-            alert("No event has any clients");
-            return events;
-        } 
-
-        return mostClients;
-    };
-
-    var getChildFriendlyEvents = function(events) {
-        return ObjectUtil.filter( events, function(event) {
-            return !event.adultOnly;
-        });
-    };
-
-    this.filterClients = function(clients) {
-        return CollectionUtil.filter(clients, filterClient);
-    };
-
-    this.filterEvents = function(events) {
-        if(Object.keys(events).length == 0) { 
-            alert("No events exist!");
-            return events;
-        }
-
-        if(curFilter == FILTER_TYPE.Most_Clients) {
-            return getEventsWithMostClients(events);
-        }
-        else if(curFilter == FILTER_TYPE.Children_Allowed) {
-            return getChildFriendlyEvents(events);
-        }
-
-        return events;
-    };
-
-    this.changeFilter = function() {
-        curFilter = document.getElementById("filterSelect").selectedIndex;
-        redrawEvents();
-    };
-}
 
 populate();
 
@@ -108,12 +38,12 @@ function fillEventTable(table) {
         var row = document.createElement("div");
         row.className = "row";
 
-        var idEl = createElementWithText("div", event.id, "col");
+        var idEl = HtmlUtil.createElementWithText("div", event.id, "col");
         var nameDisplay = (event.price > 0 ? "$" : "!") + " " + (event.adultOnly ? "*" : "#") + " " + event.name;
-        var nameEl = createElementWithText("div", nameDisplay, "col");
-        var dateEl = createElementWithText("div", event.getDate(), "col");
-        var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "", "col");
-        var price = createElementWithText("div", event.price, "col");
+        var nameEl = HtmlUtil.createElementWithText("div", nameDisplay, "col");
+        var dateEl = HtmlUtil.createElementWithText("div", event.getDate(), "col");
+        var adultOnly = HtmlUtil.createElementWithText("div", event.adultOnly ? "+18" : "", "col");
+        var price = HtmlUtil.createElementWithText("div", event.price, "col");
         
         row.appendChild(idEl);
         row.appendChild(nameEl);
@@ -131,11 +61,11 @@ function fillEventTable(table) {
 
             var innerRow = document.createElement("div");
             innerRow.className = "inner_row";
-            var cIdEl = createElementWithText("div", index, "col");
-            var clNameEl = createElementWithText("div", client.getFullName(), "col");
-            var clGenderEl = createElementWithText("div", client.gender, "col");
-            var clAgeEl = createElementWithText("div", client.age, "col");
-            var deleteBtn = createElementWithClass("div", "col");
+            var cIdEl = HtmlUtil.createElementWithText("div", index, "col");
+            var clNameEl = HtmlUtil.createElementWithText("div", client.getFullName(), "col");
+            var clGenderEl = HtmlUtil.createElementWithText("div", client.gender, "col");
+            var clAgeEl = HtmlUtil.createElementWithText("div", client.age, "col");
+            var deleteBtn = HtmlUtil.createElementWithClass("div", "col");
             deleteBtn.innerHTML = ("<button onclick=\"controller.removeClient('" + key + "','" + index + "')\">Delete</button>");
 
             innerRow.appendChild(cIdEl);
@@ -150,13 +80,15 @@ function fillEventTable(table) {
     }
 }
 
+
+
 function createClientHeader() {
-    var headerRow = createElementWithClass("div", "inner_row");
-    var id = createElementWithText("div", "ID", "col");
-    var name = createElementWithText("div", "Name", "col");
-    var gender = createElementWithText("div", "Gender", "col");
-    var age = createElementWithText("div", "Age", "col");
-    var deleteBtn = createElementWithClass("div", "col");
+    var headerRow = HtmlUtil.createElementWithClass("div", "inner_row");
+    var id = HtmlUtil.createElementWithText("div", "ID", "col");
+    var name = HtmlUtil.createElementWithText("div", "Name", "col");
+    var gender = HtmlUtil.createElementWithText("div", "Gender", "col");
+    var age = HtmlUtil.createElementWithText("div", "Age", "col");
+    var deleteBtn = HtmlUtil.createElementWithClass("div", "col");
 
     headerRow.appendChild(id);
     headerRow.appendChild(name);
@@ -167,19 +99,6 @@ function createClientHeader() {
     return headerRow;
 }
 
-function createElementWithClass(elType, elClass) {
-    var element = document.createElement(elType);
-    element.className = elClass;
-    return element;
-}
-
-function createElementWithText(elType, text, elClass) {
-    
-    var element = document.createElement(elType);
-    element.innerHTML = text;
-    if(elClass) { element.className = elClass; }
-    return element;
-}
 
 function createEvent() {
     var name = document.forms["createEvent"]["name"].value;

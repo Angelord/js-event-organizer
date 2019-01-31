@@ -50,7 +50,24 @@ var ObjectUtil = {
                 filteredObj[key] = object[key];
             }
         }
-        
+
         return filteredObj;
+    }
+};
+
+var HtmlUtil = {
+
+    createElementWithClass : function(elType, elClass) {
+        var element = document.createElement(elType);
+        element.className = elClass;
+        return element;
+    },
+
+    createElementWithText : function(elType, text, elClass) {
+        
+        var element = document.createElement(elType);
+        element.innerHTML = text;
+        if(elClass) { element.className = elClass; }
+        return element;
     }
 };
