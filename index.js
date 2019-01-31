@@ -78,8 +78,6 @@ function fillEventTable(table) {
     }
 }
 
-
-
 function createClientHeader() {
     var headerRow = HtmlUtil.createElementWithClass("div", "inner_row");
     var id = HtmlUtil.createElementWithText("div", "ID", "col");
@@ -96,7 +94,6 @@ function createClientHeader() {
 
     return headerRow;
 }
-
 
 function createEvent() {
     var name = document.forms["createEvent"]["name"].value;
