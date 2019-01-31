@@ -38,16 +38,25 @@ function Event(name, date, adultOnly, price) {
     this.id = idGenerator.next();
     this.name = name;
     this.adultOnly = adultOnly;  
-    this.price = (price ? price : 0); 
     this.clients = [];
+    var price = (price ? price : 0); 
+
+    this.getPrice = function() { return price; };
+
+    this.setPrice = function(newPrice) { 
+        price = newPrice;
+        this.clients = [];
+    };
 
     this.addClient = function (client) {
+        client.wallet -= price;
         this.clients.push(client);
     };
 
     this.removeClient = function(clientId) {
         for(var i = this.clients.length - 1; i >= 0; i--) {
             if(this.clients[i].id == clientId) {
+                this.clients[i].wallet += price;
                 this.clients.splice(i, 1);
                 return;
             }
@@ -72,13 +81,14 @@ function Event(name, date, adultOnly, price) {
     };
 }
 
-function Client(firstName, lastName, gender, age) {
+function Client(firstName, lastName, gender, age, wallet) {
 
     this.id = idGenerator.next();
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
     this.age = age;
+    this.wallet = wallet;
     this.getFullName = function() { return this.firstName + " " + this.lastName; };
 }
 

@@ -30,7 +30,7 @@ var defaultController = {
 
         if(!strings.isBlank(name)) { event.name = name; }
         event.adultOnly = adultOnly;
-        if(!isNaN(price)) { event.price = price; }
+        if(!isNaN(price)) { event.setPrice(price); }
 
         redraw();
     }, 
@@ -55,11 +55,12 @@ var defaultController = {
         var lname = document.forms["createClient"]["lastName"].value;
         var gender = document.forms["createClient"]["gender"].value;
         var age = document.forms["createClient"]["age"].value;
+        var waller = document.forms["createClient"]["wallet"].value;
 
         if(strings.isBlank(fname) || strings.isBlank(lname) || strings.isBlank(gender)) { return; }
         if(isNaN(age)) { return; }
 
-        data.addClient(new Client(fname, lname, gender, age));
+        data.addClient(new Client(fname, lname, gender, age, wallet));
 
         redraw();
     },

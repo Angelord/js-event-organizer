@@ -12,12 +12,12 @@ function populate() {
     var ev1 = new Event("Wedding", new Date(), false, 0);
     data.addEvent(ev1);
 
-    var ev2 = new Event("New Year's Party", new Date(), true, 100);
+    var ev2 = new Event("New Year's Party", new Date(), true, 30);
     data.addEvent(ev2);
 
-    var client1 = new Client("Ivan", "Georgiev", "male", 18); 
-    var client2 = new Client("Mariq", "Mariq", "female", 22); 
-    var client3 = new Client("Georgi", "Gechev", "male", 12);
+    var client1 = new Client("Ivan", "Georgiev", "male", 18, 120); 
+    var client2 = new Client("Mariq", "Mariq", "female", 22, 50); 
+    var client3 = new Client("Georgi", "Gechev", "male", 12, 100);
 
     data.addClient(client1);
     data.addClient(client2);
@@ -67,7 +67,7 @@ function fillEventTable(table) {
         var nameEl = HtmlUtil.createElementWithText("div", nameDisplay, "col");
         var dateEl = HtmlUtil.createElementWithText("div", event.getDate(), "col");
         var adultOnly = HtmlUtil.createElementWithText("div", event.adultOnly ? "+18" : "", "col");
-        var price = HtmlUtil.createElementWithText("div", event.price, "col");
+        var price = HtmlUtil.createElementWithText("div", event.getPrice(), "col");
         
         row.appendChild(idEl);
         row.appendChild(nameEl);
@@ -99,6 +99,7 @@ function createClientRow(client, innerRow, eventId) {
     var nameEl = HtmlUtil.createElementWithText("div", client.getFullName(), "col");
     var genderEl = HtmlUtil.createElementWithText("div", client.gender, "col");
     var ageEl = HtmlUtil.createElementWithText("div", client.age, "col");
+    var walletEl = HtmlUtil.createElementWithText("div", client.wallet, "col");
     var deleteBtn = HtmlUtil.createElementWithClass("div", "col");
 
     if(innerRow) {
@@ -112,6 +113,7 @@ function createClientRow(client, innerRow, eventId) {
     row.appendChild(nameEl);
     row.appendChild(genderEl);
     row.appendChild(ageEl);
+    row.appendChild(walletEl);
     row.appendChild(deleteBtn);
     
     return row;
@@ -123,12 +125,14 @@ function createClientHeader() {
     var name = HtmlUtil.createElementWithText("div", "Name", "col");
     var gender = HtmlUtil.createElementWithText("div", "Gender", "col");
     var age = HtmlUtil.createElementWithText("div", "Age", "col");
+    var wallet = HtmlUtil.createElementWithText("div", "Wallet", "col");
     var deleteBtn = HtmlUtil.createElementWithClass("div", "col");
 
     headerRow.appendChild(id);
     headerRow.appendChild(name);
     headerRow.appendChild(gender);
     headerRow.appendChild(age);
+    headerRow.appendChild(wallet);
     headerRow.appendChild(deleteBtn);
 
     return headerRow;
