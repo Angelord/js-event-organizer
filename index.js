@@ -118,11 +118,14 @@ function fillEventTable(table) {
         row.appendChild(dateEl);
         row.appendChild(adultOnly);
 
-        if(event.clients.length > 0) {
-            row.appendChild(createClientHeader());
-        }
+        
         
         var filteredClients = filterer.filterClients(event.clients);
+
+        if(filteredClients.length > 0) {
+            row.appendChild(createClientHeader());
+        }
+
         CollectionUtil.forEach(filteredClients, function (client, index) {
 
             var innerRow = document.createElement("div");
