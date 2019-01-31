@@ -70,12 +70,3 @@ div.row div.col:nth-child(1) {
     width: 5%;
     text-align: center;
 }
-
-div.row div.col:nth-child(2) {
-    width: auto;
-}
-
-div.row div.col:nth-child(3) {
-    width: 5%;
-    float: right;
-}

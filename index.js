@@ -37,27 +37,36 @@ function fillEventTable(table) {
 
             var innerRow = document.createElement("div");
             innerRow.className = "inner_row";
-            var cIdEl = createElementWithText("div", index);
-            var clNameEl = createElementWithText("div", client.getFullName());
-            var deleteBtn = document.createElement("div");
+            var cIdEl = createElementWithText("div", index, "col");
+            var clNameEl = createElementWithText("div", client.getFullName(), "col");
+            var clGenderEl = createElementWithText("div", client.gender, "col");
+            var clAgeEl = createElementWithText("div", client.age, "col");
+            var deleteBtn = createElementWithClass("div", "col");
             deleteBtn.innerHTML = ("<button onclick=\"controller.removeClient('" + key + "','" + index + "')\">Delete</button>");
-
-            cIdEl.className = clNameEl.className = deleteBtn.className = "col";
 
             innerRow.appendChild(cIdEl);
             innerRow.appendChild(clNameEl);
+            innerRow.appendChild(clGenderEl);
+            innerRow.appendChild(clAgeEl);
             innerRow.appendChild(deleteBtn);
             row.appendChild(innerRow);
         } );
 
         table.appendChild(row);
     }
-
 }
 
-function createElementWithText(elType, text) {
+function createElementWithClass(elType, elClass) {
+    var element = document.createElement(elType);
+    element.className = elClass;
+    return element;
+}
+
+function createElementWithText(elType, text, elClass) {
+    
     var element = document.createElement(elType);
     element.innerHTML = text;
+    if(elClass) { element.className = elClass; }
     return element;
 }
 
