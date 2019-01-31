@@ -39,7 +39,7 @@ function Event(name, date, adultOnly, price) {
     this.name = name;
     this.adultOnly = adultOnly;  
     this.clients = [];
-    var price = (price ? price : 0); 
+    var price = (price ? parseInt(price) : 0); 
 
     this.getPrice = function() { return price; };
 
@@ -49,14 +49,27 @@ function Event(name, date, adultOnly, price) {
     };
 
     this.addClient = function (client) {
-        client.wallet -= price;
+        if(!client.isVIP()) {
+            client.wallet -= price;
+        }
+        else {
+            client.vipAttendance = this;
+        }
+        client.numEventsAttended++;
         this.clients.push(client);
     };
 
     this.removeClient = function(clientId) {
         for(var i = this.clients.length - 1; i >= 0; i--) {
             if(this.clients[i].id == clientId) {
-                this.clients[i].wallet += price;
+                var client = this.clients[i];
+                if(client.vipAttendance != this) {
+                    client.wallet += price;
+                }
+                else {
+                    client.vipAttendance = null;
+                }
+                client.numEventsAttended--;
                 this.clients.splice(i, 1);
                 return;
             }
@@ -88,7 +101,10 @@ function Client(firstName, lastName, gender, age, wallet) {
     this.lastName = lastName;
     this.gender = gender;
     this.age = age;
-    this.wallet = wallet;
+    this.wallet = parseInt(wallet);
+    this.numEventsAttended = 0;
+    this.vipAttendance = -1;
+    this.isVIP = function() { return (this.vipAttendance == -1 && this.numEventsAttended == 5); }
     this.getFullName = function() { return this.firstName + " " + this.lastName; };
 }
 

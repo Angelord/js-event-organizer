@@ -55,10 +55,11 @@ var defaultController = {
         var lname = document.forms["createClient"]["lastName"].value;
         var gender = document.forms["createClient"]["gender"].value;
         var age = document.forms["createClient"]["age"].value;
-        var waller = document.forms["createClient"]["wallet"].value;
+        var wallet = document.forms["createClient"]["wallet"].value;
 
         if(strings.isBlank(fname) || strings.isBlank(lname) || strings.isBlank(gender)) { return; }
         if(isNaN(age)) { return; }
+        if(isNaN(wallet)) { return; }
 
         data.addClient(new Client(fname, lname, gender, age, wallet));
 

@@ -12,6 +12,15 @@ var idGenerator = {
 
 var CollectionUtil = { 
 
+    contains : function(collection, element) {
+        for(var i = 0; i < collection.length; i++) {
+            if(collection[i] == element) {
+                return true;
+            }
+        }
+        return false;
+    },
+
     forEach : function(collection, callback) {
         for(var i = 0; i < collection.length; i++) {
             callback(collection[i], i);
