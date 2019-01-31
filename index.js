@@ -3,8 +3,6 @@ var TABLE_ID = "table_events";
 
 var filterer = new Filterer();
 
-
-
 populate();
 
 redrawEvents();
@@ -116,13 +114,6 @@ function modifyEvent() {
     var price = document.forms["modifyEvent"]["price"].value;
 
     controller.modifyEvent(id, name, adultOnly, price);
-    redrawEvents();
-}
-
-function removeEvent() {
-    var id = document.forms["removeEvent"]["id"].value;
-
-    var removedEv = controller.removeEvent(id);
     redrawEvents();
 }
 

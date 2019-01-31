@@ -33,6 +33,7 @@ var defaultController = {
     }, 
 
     removeEvent : function(id) {
+        var id = document.forms["removeEvent"]["id"].value;
 
         if(id in data.getEvents()) {
 
@@ -41,7 +42,8 @@ var defaultController = {
             data.deleteEvent(id);
             
             alert("Removed event with name " + event.name);
-            return event;
+            
+            redrawEvents();
         }
     },
 
