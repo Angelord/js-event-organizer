@@ -132,7 +132,7 @@ var defaultController = {
         if(isNaN(rating)) { return; }
 
         rating = parseInt(rating);
-        if(rating < 0 && rating > 6) {
+        if(rating < 0 || rating > 6) {
             alert("Invalid rating! Ratings must be in the range [0;6]");
             return;
         }
