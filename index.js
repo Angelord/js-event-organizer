@@ -1,21 +1,34 @@
 
 var TABLE_ID = "table_events";
 
-var filterer = {
-    None : 0,
-    Male_Only : 1,
-    Female_Only: 2,
-    curFilter : this.None,
-    
-    filter : function(clients) {
-        return CollectionUtil.filter(clients, function(client, index) {
-            if(this.curFilter == this.Male_Only && client.gender != "male") { return false; }
-            if(this.curFilter == this.Female_Only && client.gender != "female") { return false; }
+var filterer = new Filterer();
 
-            return true;
-        });
-    }
-};
+function Filterer() {
+    
+    var FILTER_TYPE = {
+        None : 0,
+        Male_Only : 1,
+        Female_Only: 2
+    };
+    
+    var curFilter = FILTER_TYPE.None;
+
+    var filterClient = function(client) {
+        if(curFilter == FILTER_TYPE.Male_Only && client.gender != "male") { return false; }
+        if(curFilter == FILTER_TYPE.Female_Only && client.gender != "female") { return false; }
+
+        return true;
+    };
+
+    this.changeFilter = function() {
+        curFilter = document.getElementById("filterSelect").selectedIndex;
+        redrawEvents();
+    };
+
+    this.filter = function(clients) {
+        return CollectionUtil.filter(clients, filterClient);
+    };
+}
 
 var ev = controller.createEvent("Wedding", false);
 ev.addClient(new Client("Ivan", "Georgiev", "male", 18));
