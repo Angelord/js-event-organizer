@@ -119,8 +119,6 @@ function fillEventTable(table) {
         row.appendChild(dateEl);
         row.appendChild(adultOnly);
 
-        
-        
         var filteredClients = filterer.filterClients(event.clients);
 
         if(filteredClients.length > 0) {
