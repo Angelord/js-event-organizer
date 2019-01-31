@@ -45,6 +45,9 @@ function redraw() {
 
 function fillClientTable(table) {
     var clients = filterer.filterClients(data.getClients());
+
+    table.appendChild(createClientHeader(false));
+
     for(var key in clients) {
 
         var client = clients[key];
@@ -98,7 +101,7 @@ function fillEventTable(table) {
         var filteredClients = filterer.filterClients(event.clients);
 
         if(filteredClients.length > 0) {
-            row.appendChild(createClientHeader());
+            row.appendChild(createClientHeader(true));
         }
 
         CollectionUtil.forEach(filteredClients, function (client) {
@@ -162,8 +165,8 @@ function createEventHeader() {
     return row;
 }
 
-function createClientHeader() {
-    var headerRow = HtmlUtil.createElementWithClass("div", "inner_row");
+function createClientHeader(innerRow) {
+    var headerRow = HtmlUtil.createElementWithClass("div", innerRow ? "inner_row" : "row");
     var id = HtmlUtil.createElementWithText("div", "ID", "col");
     var name = HtmlUtil.createElementWithText("div", "Name", "col");
     var gender = HtmlUtil.createElementWithText("div", "Gender", "col");
