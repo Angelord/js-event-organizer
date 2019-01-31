@@ -100,8 +100,8 @@ function redrawEvents() {
 }
 
 function fillEventTable(table) {
-
-    var filteredEvents = filterer.filterEvents(events);
+    
+    var filteredEvents = filterer.filterEvents(data.getEvents());
     for(var key in filteredEvents) {
         var event = filteredEvents[key];
 
