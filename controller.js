@@ -1,9 +1,12 @@
 
 var LOCKED_MSG = "System locked. Unable to perform aciton";
 
-var defaultController = {
+function Controller() {
 
-    createEvent : function() {
+    var locked = false;
+    var unlockedFunctions = {};
+
+    this.createEvent = function() {
         var name = document.forms["createEvent"]["name"].value;
         var adultOnly = document.forms["createEvent"]["adultOnly"].checked;
         var price = document.forms["createEvent"]["price"].value;
@@ -16,9 +19,9 @@ var defaultController = {
         data.addEvent(event);
 
         redraw();
-    },
+    };
 
-    modifyEvent : function() {
+    this.modifyEvent = function() {
         var id = document.forms["modifyEvent"]["id"].value;
         var name = document.forms["modifyEvent"]["name"].value;
         var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
@@ -33,9 +36,9 @@ var defaultController = {
         if(!isNaN(price)) { event.setPrice(price); }
 
         redraw();
-    }, 
+    }; 
 
-    removeEvent : function() {
+    this.removeEvent = function() {
         var id = document.forms["removeEvent"]["id"].value;
 
         if(id in data.getEvents()) {
@@ -48,9 +51,9 @@ var defaultController = {
             
             redraw();
         }
-    },
+    };
 
-    createClient : function() {
+    this.createClient = function() {
         var fname = document.forms["createClient"]["firstName"].value;
         var lname = document.forms["createClient"]["lastName"].value;
         var gender = document.forms["createClient"]["gender"].value;
@@ -64,17 +67,17 @@ var defaultController = {
         data.addClient(new Client(fname, lname, gender, age, wallet));
 
         redraw();
-    },
+    };
 
-    deleteClient : function(clientId) {
+    this.deleteClient = function(clientId) {
         if(!(clientId in data.getClients())) { return; }
 
         data.deleteClient(clientId);
 
         redraw();
-    },
+    };
 
-    addClientToEvent : function() {
+    this.addClientToEvent = function() {
         var clientId = document.forms["addClientToEvent"]["clientId"].value;
         var eventId = document.forms["addClientToEvent"]["eventId"].value;
 
@@ -102,25 +105,25 @@ var defaultController = {
         data.addClientToEvent(clientId, eventId);
 
         redraw();
-    },
+    };
 
-    removeClientFromEvent : function(clientId, eventId) {
+    this.removeClientFromEvent = function(clientId, eventId) {
 
         data.removeClientFromEvent(clientId, eventId);
 
         redraw();
-    },
+    };
 
-    archiveEvent : function(eventId) {
+    this.archiveEvent = function(eventId) {
         if(!(eventId in data.getEvents())) { return; }
 
         var event = data.getEvent(eventId);
         event.archived = true;
 
         redraw();
-    },
+    };
 
-    rateEvent : function() {
+    this.rateEvent = function() {
         var clientId = document.forms["addClientToEvent"]["clientId"].value;
 
         var eventId = document.forms["rateEvent"]["eventId"].value;
@@ -151,53 +154,35 @@ var defaultController = {
 
         event.rate(clientId, rating);
         redraw();
-    },
+    };
 
-    lock : function() { controller = lockedController; },
-    unlock : function() { }
+    this.lock = function() { 
+        if(!locked) {
+            for(var key in this) {
+                if(key == "lock" || key == "unlock") { continue; }
+
+                unlockedFunctions[key] = this[key];
+                this[key] = function() {
+                    alert(LOCKED_MSG);
+                };
+            }
+
+            locked = true;
+        }
+    };
+
+    this.unlock = function() {
+        if(locked) {
+            for(var key in this) {
+                if(key == "lock" || key == "unlock") { continue; }
+
+                this[key] = unlockedFunctions[key];
+            }
+            unlockedFunctions = {};
+            locked = false;
+        }
+    };
 }
 
-var lockedController = {
-
-    createEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    modifyEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    removeEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    createClient : function() {
-        alert(LOCKED_MSG);        
-    },
-
-    deleteClient : function() {
-        alert(LOCKED_MSG);
-    },
-
-    addClientToEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    removeClientFromEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    archiveEvent : function() {
-        alert(LOCKED_MSG);        
-    },
-
-    rateEvent : function() {
-        alert(LOCKED_MSG);
-    },
-
-    lock : function() { },
-    unlock : function() { controller = defaultController; }
-}
-
-var controller = defaultController;
+var controller = new Controller();
 
