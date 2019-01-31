@@ -23,11 +23,9 @@ function fillEventTable(table) {
         var row = document.createElement("div");
         row.className = "row";
 
-        var idEl = createElementWithText("div", event.id);
-        var nameEl = createElementWithText("div", event.name);
-        var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "");
-
-        idEl.className = nameEl.className = adultOnly.className = "col";
+        var idEl = createElementWithText("div", event.id, "col");
+        var nameEl = createElementWithText("div", event.name, "col");
+        var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "", "col");
         
         row.appendChild(idEl);
         row.appendChild(nameEl);

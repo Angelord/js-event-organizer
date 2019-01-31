@@ -58,6 +58,19 @@ div.table div.col {
     line-height: 30px;
 }
 
+.col button {
+    border: 1px solid gray;
+    margin: 0;
+    padding: 0;
+    height: 92%;
+    width: 92%;
+    background-color: whitesmoke;
+}
+
+.col button:hover {
+    background-color: gray;
+}
+
 div.row:hover {
     background-color: lightgray;
 }
@@ -75,15 +88,3 @@ div.inner_row div.col:last-child {
     float: right;
 }
 
-.col button {
-    border: 1px solid gray;
-    margin: 0;
-    padding: 0;
-    height: 92%;
-    width: 92%;
-    background-color: whitesmoke;
-}
-
-.col button:hover {
-    background-color: gray;
-}
