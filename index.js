@@ -80,6 +80,11 @@ function fillEventTable(table) {
             archiveBtn.innerHTML = ("<button onclick=\"controller.archiveEvent('" + event.id + "')\">Archive</button>");
             row.appendChild(archiveBtn);
         }
+        else {
+            var profitsBtn = HtmlUtil.createElementWithClass("div", "col");
+            profitsBtn.innerHTML = ("<button onclick=\"showEventProfits('" + event.id + "')\">Profits</button>");
+            row.appendChild(profitsBtn);
+        }
 
         var filteredClients = filterer.filterClients(event.clients);
 
@@ -144,16 +149,8 @@ function createClientHeader() {
     return headerRow;
 }
 
-function addClient() {
-    var evId = document.forms["addClient"]["eventId"].value;
-    var firstName = document.forms["addClient"]["firstName"].value;
-    var lastName = document.forms["addClient"]["lastName"].value;
-    var gender = document.forms["addClient"]["gender"].value;
-    var age = document.forms["addClient"]["age"].value;
-
-    controller.addClient(evId, firstName, lastName, gender, age);
-    redraw();
+function showEventProfits(eventId) {
+    alert("Profits from event " + data.getEvent(eventId).getProfits());
 }
-
 
 

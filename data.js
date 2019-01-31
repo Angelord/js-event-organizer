@@ -42,6 +42,10 @@ function Event(name, date, adultOnly, price) {
     this.clients = [];
     var price = (price ? parseInt(price) : 0); 
 
+    this.getProfits = function() {
+        return (this.clients.length * price);
+    };
+
     this.getPrice = function() { return price; };
 
     this.setPrice = function(newPrice) { 
