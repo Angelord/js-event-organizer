@@ -161,26 +161,38 @@ var lockedController = {
 
     createEvent : function() {
         alert(LOCKED_MSG);
-        return false; 
     },
 
     modifyEvent : function() {
         alert(LOCKED_MSG);
-        return false; 
     },
 
     removeEvent : function() {
         alert(LOCKED_MSG);
-        return false; 
     },
 
-    addClient : function() {
-        alert(LOCKED_MSG);
-        return false
+    createClient : function() {
+        alert(LOCKED_MSG);        
     },
-    removeClient : function() {
+
+    deleteClient : function() {
         alert(LOCKED_MSG);
-        return false
+    },
+
+    addClientToEvent : function() {
+        alert(LOCKED_MSG);
+    },
+
+    removeClientFromEvent : function() {
+        alert(LOCKED_MSG);
+    },
+
+    archiveEvent : function() {
+        alert(LOCKED_MSG);        
+    },
+
+    rateEvent : function() {
+        alert(LOCKED_MSG);
     },
 
     lock : function() { },
