@@ -15,7 +15,7 @@ var defaultController = {
 
         data.addEvent(event);
 
-        redrawEvents();
+        redraw();
     },
 
     modifyEvent : function() {
@@ -32,7 +32,7 @@ var defaultController = {
         event.adultOnly = adultOnly;
         if(!isNaN(price)) { event.price = price; }
 
-        redrawEvents();
+        redraw();
     }, 
 
     removeEvent : function() {
@@ -46,27 +46,62 @@ var defaultController = {
             
             alert("Removed event with name " + event.name);
             
-            redrawEvents();
+            redraw();
         }
     },
 
-    addClient : function(eventId, fname, lname, gender, age) {
-        if(!(eventId in data.getEvents())) { return; }
+    createClient : function() {
+        var fname = document.forms["createClient"]["firstName"].value;
+        var lname = document.forms["createClient"]["lastName"].value;
+        var gender = document.forms["createClient"]["gender"].value;
+        var age = document.forms["createClient"]["age"].value;
+
         if(strings.isBlank(fname) || strings.isBlank(lname) || strings.isBlank(gender)) { return; }
         if(isNaN(age)) { return; }
-        if(data.getEvents()[eventId].adultOnly && age < 18) {
+
+        data.addClient(new Client(fname, lname, gender, age));
+
+        redraw();
+    },
+
+    deleteClient : function(clientId) {
+        if(!(clientId in data.getClients())) { return; }
+
+        data.deleteClient(clientId);
+
+        redraw();
+    },
+
+    addClientToEvent : function() {
+        var clientId = document.forms["addClientToEvent"]["clientId"].value;
+        var eventId = document.forms["addClientToEvent"]["eventId"].value;
+
+        if(!(clientId in data.getClients())) { return; }
+        if(!(eventId in data.getEvents())) { return; }
+
+        var client = data.getClient(clientId);
+        var event = data.getEvent(eventId);
+
+        if(event.adultOnly && client.age < 18) {
             alert("The client is too young to attend."); 
             return; 
         }
 
-        data.addClientToEvent(eventId, new Client(fname, lname, gender, age));
+        if(event.containsClient(client)) {
+            alert("Client already attending event");
+            return;
+        }
+        
+        data.addClientToEvent(clientId, eventId);
+
+        redraw();
     },
 
-    removeClient : function(eventId, clientIndex) {
+    removeClientFromEvent : function(clientId, eventId) {
 
-        data.removeClientFromEvent(eventId, clientIndex);
+        data.removeClientFromEvent(clientId, eventId);
 
-        redrawEvents();
+        redraw();
     },
 
     lock : function() { controller = lockedController; },

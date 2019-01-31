@@ -32,13 +32,19 @@
                 <input type='submit' value='Remove' class='submit_btn'/>
             </form>
 
-            <form class="option_menu" name="addClient" action='JavaScript:addClient()'>
+            <form class="option_menu" name="createClient" action='JavaScript:controller.createClient()'>
+                    <h4> Create Client:</h4>
+                    <label>First Name</label>                             <input type='text' name='firstName' />
+                    <label>Last Name</label>                              <input type='text' name='lastName' />
+                    <label>Gender</label>                                 <input type='text' name='gender' />
+                    <label>Age</label>                                    <input type='text' name='age' />
+                    <input type='submit' value='Add' class='submit_btn'/>
+            </form>
+    
+            <form class="option_menu" name="addClientToEvent" action='JavaScript:controller.addClientToEvent()'>
                 <h4> Add Client:</h4>
                 <label>Event ID</label>                               <input type='text' name='eventId' />
-                <label>First Name</label>                             <input type='text' name='firstName' />
-                <label>Last Name</label>                              <input type='text' name='lastName' />
-                <label>Gender</label>                                 <input type='text' name='gender' />
-                <label>Age</label>                                    <input type='text' name='age' />
+                <label>Client ID</label>                             <input type='text' name='clientId' />
                 <input type='submit' value='Add' class='submit_btn'/>
             </form>
 
@@ -58,6 +64,11 @@
             </div>
     </div>
     
+    <h3>Clients</h3>
+    <div class="table" id="table_clients">
+        </div>
+
+    <h3>Events</h3>
     <div class="table" id="table_events">
     </div>
 

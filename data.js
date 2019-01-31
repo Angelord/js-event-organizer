@@ -4,31 +4,33 @@ var data = new Data();
 function Data() {
 
     var events = {};
-    // var clients = {};
+    var clients = {};
 
-    this.addEvent = function(event) {
-        events[event.id] = event;
-    };
+    this.getEvents = function() { return events; };
 
-    this.deleteEvent = function(id) {
-        delete events[id];
-    };
+    this.getEvent = function(eventId) { return events[eventId]; };
 
-    this.getEvents = function() {
-        return events;
-    };
+    this.addEvent = function(event) { events[event.id] = event; };
 
-    this.getEvent = function(eventId) {
-        return events[eventId];
-    };
+    this.deleteEvent = function(id) { delete events[id]; };
 
-    this.addClientToEvent = function(eventId, client) {
-        events[eventId].addClient(client);
-    };
+    this.getClients = function() { return clients; }
 
-    this.removeClientFromEvent = function(eventId, clientIndex) {
-        events[eventId].removeClient(clientIndex);
-    };
+    this.getClient = function(clientId) { return clients[clientId]; }
+
+    this.addClient = function(client) { clients[client.id] = client; }
+
+    this.deleteClient = function(clientId) {
+        ObjectUtil.forEach(events, function(event) {
+            event.removeClient(clientId);
+        });
+
+        delete clients[clientId];
+    }
+
+    this.addClientToEvent = function(clientId, eventId) { events[eventId].addClient(clients[clientId]); };
+
+    this.removeClientFromEvent = function(clientId, eventId) { events[eventId].removeClient(clientId); };
 }
 
 function Event(name, date, adultOnly, price) {
@@ -43,20 +45,36 @@ function Event(name, date, adultOnly, price) {
         this.clients.push(client);
     };
 
-    this.removeClient = function(clientIndex) {
-        this.clients.splice(clientIndex, 1);
+    this.removeClient = function(clientId) {
+        for(var i = this.clients.length - 1; i >= 0; i--) {
+            if(this.clients[i].id == clientId) {
+                this.clients.splice(i, 1);
+                return;
+            }
+        }
+    };
+
+    this.containsClient = function(client) {
+        for(var i = 0; i < this.clients.length; i++) {
+            if(this.clients[i].id == client.id) {
+                return true;
+            }
+        }
+        return false;
     };
 
     this.numClients = function() {
         return this.clients.length;
-    }
+    };
 
     this.getDate = function() { 
         return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
-    } 
+    };
 }
 
 function Client(firstName, lastName, gender, age) {
+
+    this.id = idGenerator.next();
     this.firstName = firstName;
     this.lastName = lastName;
     this.gender = gender;
@@ -111,7 +129,12 @@ function Filterer() {
     };
 
     this.filterClients = function(clients) {
-        return CollectionUtil.filter(clients, filterClient);
+        if(Array.isArray(clients)) {
+            return CollectionUtil.filter(clients, filterClient);
+        }
+        else {
+            return ObjectUtil.filter(clients, filterClient);
+        }
     };
 
     this.filterEvents = function(events) {
@@ -132,6 +155,6 @@ function Filterer() {
 
     this.changeFilter = function() {
         curFilter = document.getElementById("filterSelect").selectedIndex;
-        redrawEvents();
+        redraw();
     };
 }

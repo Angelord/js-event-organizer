@@ -41,6 +41,13 @@ var CollectionUtil = {
 };
 
 var ObjectUtil = {
+
+    forEach : function(object, callback) {
+        for(var key in object) {
+            callback(object[key]);
+        }
+    },
+
     filter : function(object, predicate) {
         
         var filteredObj = {};
