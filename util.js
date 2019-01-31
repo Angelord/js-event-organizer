@@ -21,10 +21,12 @@ var CollectionUtil = {
     filter : function(collection, predicate) {
         var filteredColl = [];
         for(var i = 0; i < collection.length; i++) {
-            if(predicate(collection[i])) {
-                filteredColl.push(collection[i], i);
+            if(predicate(collection[i], i)) {
+                filteredColl.push(collection[i]);
             }
         }
+
+        return filteredColl;
     },
 
     map : function(collection, mapper) {
