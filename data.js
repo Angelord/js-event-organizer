@@ -116,7 +116,9 @@ function Filterer() {
         Male_Only : 1,
         Female_Only : 2,
         Most_Clients : 3,
-        Children_Allowed : 4
+        Children_Allowed : 4,
+        Arhived_Only : 5,
+        Opened_Only : 6
     };
     
     var curFilter = FILTER_TYPE.None;
@@ -155,6 +157,18 @@ function Filterer() {
         });
     };
 
+    var getArchivedEvents = function(events) {
+        return ObjectUtil.filter(events, function(event) {
+            return event.archived;
+        });
+    };
+
+    var getOpenEvents = function(events) {
+        return ObjectUtil.filter(events, function(event) {
+            return !event.archived;
+        });
+    };
+
     this.filterClients = function(clients) {
         if(Array.isArray(clients)) {
             return CollectionUtil.filter(clients, filterClient);
@@ -175,6 +189,12 @@ function Filterer() {
         }
         else if(curFilter == FILTER_TYPE.Children_Allowed) {
             return getChildFriendlyEvents(events);
+        }
+        else if(curFilter == FILTER_TYPE.Arhived_Only) {
+            return getArchivedEvents(events);
+        }
+        else if(curFilter == FILTER_TYPE.Opened_Only) {
+            return getOpenEvents(events);
         }
 
         return events;
