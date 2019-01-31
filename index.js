@@ -65,7 +65,7 @@ function fillEventTable(table) {
         row.className = "row";
 
         var idEl = HtmlUtil.createElementWithText("div", event.id, "col");
-        var nameDisplay = (event.archived ? "~" : "") + (event.price > 0 ? "$" : "!") + " " + (event.adultOnly ? "*" : "#") + " " + event.name;
+        var nameDisplay = (event.archived ? "~" : "") + (event.getPrice() > 0 ? "$" : "!") + " " + (event.adultOnly ? "*" : "#") + " " + event.name;
         var nameEl = HtmlUtil.createElementWithText("div", nameDisplay, "col");
         var dateEl = HtmlUtil.createElementWithText("div", event.getDate(), "col");
         var adultOnly = HtmlUtil.createElementWithText("div", event.adultOnly ? "+18" : "", "col");
