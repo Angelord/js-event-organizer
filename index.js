@@ -97,16 +97,6 @@ function createClientHeader() {
     return headerRow;
 }
 
-function modifyEvent() {
-    var id = document.forms["modifyEvent"]["id"].value;
-    var name = document.forms["modifyEvent"]["name"].value;
-    var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
-    var price = document.forms["modifyEvent"]["price"].value;
-
-    controller.modifyEvent(id, name, adultOnly, price);
-    redrawEvents();
-}
-
 function addClient() {
     var evId = document.forms["addClient"]["eventId"].value;
     var firstName = document.forms["addClient"]["firstName"].value;

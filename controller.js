@@ -18,22 +18,21 @@ var defaultController = {
         redrawEvents();
     },
 
-    modifyEvent : function(id, name, adultOnly, price) {
+    modifyEvent : function() {
+        var id = document.forms["modifyEvent"]["id"].value;
+        var name = document.forms["modifyEvent"]["name"].value;
+        var adultOnly = document.forms["modifyEvent"]["adultOnly"].checked;
+        var price = document.forms["modifyEvent"]["price"].value;
+
         if(!(id in data.getEvents())) { return; }
 
         var event = data.getEvent(id);
 
-        if(!strings.isBlank(name)) {
-            event.name = name;
-        }
-
+        if(!strings.isBlank(name)) { event.name = name; }
         event.adultOnly = adultOnly;
-        
-        if(!isNaN(price)) { 
-            event.price = price;
-        }
+        if(!isNaN(price)) { event.price = price; }
 
-        return event;
+        redrawEvents();
     }, 
 
     removeEvent : function() {
