@@ -120,6 +120,38 @@ var defaultController = {
         redraw();
     },
 
+    rateEvent : function() {
+        var clientId = document.forms["addClientToEvent"]["clientId"].value;
+
+        var eventId = document.forms["rateEvent"]["eventId"].value;
+        var clientId = document.forms["rateEvent"]["clientId"].value;
+        var rating = document.forms["rateEvent"]["rating"].value;
+
+        if(!(eventId in data.getEvents())) { return; }
+        if(!(clientId in data.getClients())) { return; }
+        if(isNaN(rating)) { return; }
+
+        rating = parseInt(rating);
+        if(rating < 0 && rating > 6) {
+            alert("Invalid rating! Ratings must be in the range [0;6]");
+            return;
+        }
+
+        var event = data.getEvent(eventId);
+        var client = data.getClient(clientId);
+        if(!event.archived) {
+            alert("Event not archived!");
+            return; 
+        }
+
+        if(!(event.containsClient(client))) {
+            alert("Client did not attend the event!");
+            return;
+        }
+
+        event.rate(clientId, rating);
+    },
+
     lock : function() { controller = lockedController; },
     unlock : function() { }
 }

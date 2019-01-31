@@ -41,10 +41,24 @@ function Event(name, date, adultOnly, price) {
     this.adultOnly = adultOnly;  
     this.clients = [];
     var price = (price ? parseInt(price) : 0); 
+    var ratings = {};
 
-    this.getProfits = function() {
-        return (this.clients.length * price);
+    this.getRating = function() { 
+        var totalRating = 0;
+        for(var key in ratings) {
+            totalRating += ratings[key];
+        }
+        return totalRating / Object.keys(ratings).length; 
     };
+
+    this.rate = function(clientId, value) { 
+        if(value > 6) { value = 6; }
+        if(value < 0) { value = 0; }
+
+        ratings[clientId] = value;
+     };
+
+    this.getProfits = function() { return (this.clients.length * price); };
 
     this.getPrice = function() { return price; };
 
