@@ -30,7 +30,7 @@ var defaultController = {
     },
 
     createEvent : function(name, adultOnly) {
-        var event = new Event(name, adultOnly);
+        var event = new Event(name, new Date(), adultOnly);
         events[event.id] = event;
         return event;
     },
@@ -95,7 +95,7 @@ var lockedController = {
 var controller = defaultController;
 
 
-function Event(name, adultOnly) {
+function Event(name, date, adultOnly) {
 
     this.id = idGenerator.next();
     this.name = name;
@@ -104,6 +104,10 @@ function Event(name, adultOnly) {
     this.addClient = function (client) {
         this.clients.push(client);
     };
+
+    this.getDate = function() { 
+        return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
+    } 
 }
 
 function Client(firstName, lastName, gender, age) {

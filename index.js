@@ -58,10 +58,12 @@ function fillEventTable(table) {
 
         var idEl = createElementWithText("div", event.id, "col");
         var nameEl = createElementWithText("div", event.name, "col");
+        var dateEl = createElementWithText("div", event.getDate(), "col");
         var adultOnly = createElementWithText("div", event.adultOnly ? "+18" : "", "col");
         
         row.appendChild(idEl);
         row.appendChild(nameEl);
+        row.appendChild(dateEl);
         row.appendChild(adultOnly);
 
         if(event.clients.length > 0) {
