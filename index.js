@@ -8,6 +8,9 @@ populate();
 
 redraw();
 
+//Този документ е отговорен за визуализация на елементите.
+//Функциите тук главно генерират HTML.
+
 function populate() {
     var ev1 = new Event("Wedding", new Date(), false, 0);
     data.addEvent(ev1);

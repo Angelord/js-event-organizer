@@ -1,6 +1,8 @@
 
 var LOCKED_MSG = "System locked. Unable to perform aciton";
 
+//Тук е всичката логика за валидиране на промени и осъществавянето им
+
 function Controller() {
 
     var locked = false;
@@ -155,6 +157,9 @@ function Controller() {
         event.rate(clientId, rating);
         redraw();
     };
+
+
+    //Тук е функционалността свързана с блокиране на промени и отблокиране
 
     this.lock = function() { 
         if(!locked) {

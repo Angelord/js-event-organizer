@@ -1,4 +1,6 @@
 
+//Тука са всякакви помощни функции
+
 var strings = {
     isBlank : function(str) {
         return (!str || /^\s*$/.test(str));
