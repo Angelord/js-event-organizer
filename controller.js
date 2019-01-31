@@ -47,6 +47,11 @@ var controller = {
 
     addClient : function(eventId, client) {
         events[eventId].addClient(client);
+    },
+
+    removeClient : function(eventId, clientIndex) {
+        delete events[eventId].clients.splice(clientIndex, 1);
+        redrawEvents();
     }
 }
 

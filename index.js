@@ -34,20 +34,23 @@ function fillEventTable(table) {
         row.appendChild(adultOnly);
         
         CollectionUtil.forEach(event.clients, function (client, index) {
+
             var innerRow = document.createElement("div");
             innerRow.className = "inner_row";
             var cIdEl = createElementWithText("div", index);
             var clNameEl = createElementWithText("div", client.getFullName());
+            var deleteBtn = document.createElement("div");
+            deleteBtn.innerHTML = ("<button onclick=\"controller.removeClient('" + key + "','" + index + "')\">Delete</button>");
 
-            cIdEl.className = clNameEl.className = "col";
+            cIdEl.className = clNameEl.className = deleteBtn.className = "col";
 
             innerRow.appendChild(cIdEl);
             innerRow.appendChild(clNameEl);
+            innerRow.appendChild(deleteBtn);
             row.appendChild(innerRow);
         } );
 
         table.appendChild(row);
-        console.log("Redrawing");
     }
 
 }

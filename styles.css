@@ -32,11 +32,11 @@ div.options input.submit_btn {
 
 div.table div.inner_row {
     margin: 0% 0% 0% 12%;
-    width: 87.9%;
+    width: 88%;
     height: 30px;
     clear: left;
     display: inline-block;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
 }
 
 div.table div.row {
@@ -46,7 +46,7 @@ div.table div.row {
     height: 30px;
     clear: left;
     display: inline-block;
-    border: 1px solid gray;
+    border: 1px solid lightgray;
 }
 
 div.table div.col {
@@ -59,11 +59,11 @@ div.table div.col {
 }
 
 div.row:hover {
-    background-color: gray;
+    background-color: lightgray;
 }
 
 div.inner_row:hover {
-    background-color: gray;
+    background-color: lightgray;
 }
 
 div.row div.col:nth-child(1) {
