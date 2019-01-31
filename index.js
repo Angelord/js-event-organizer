@@ -8,7 +8,8 @@ function Filterer() {
     var FILTER_TYPE = {
         None : 0,
         Male_Only : 1,
-        Female_Only: 2
+        Female_Only : 2,
+        Most_Clients : 3
     };
     
     var curFilter = FILTER_TYPE.None;
@@ -20,13 +21,42 @@ function Filterer() {
         return true;
     };
 
+    var filterByMostClients = function(events) {
+        var mostClients = [];
+
+        for(var key in events) {
+            if(mostClients.length == 0 || events[key].numClients() > mostClients[0].numClients()) {
+                mostClients = [];
+                mostClients.push(events[key]);
+            }
+            else if(events[key].numClients() == mostClients[0].numClients()) {
+                mostClients.push(events[key]);
+            }
+        }
+
+        if(mostClients[0].numClients() == 0) {
+            alert("No event has any clients");
+            return events;
+        } 
+
+        return mostClients;
+    } 
+
+    this.filterClients = function(clients) {
+        return CollectionUtil.filter(clients, filterClient);
+    };
+
+    this.filterEvents = function(events) {
+        if(curFilter == FILTER_TYPE.Most_Clients) {
+            return filterByMostClients(events);
+        }
+
+        return events;
+    };
+
     this.changeFilter = function() {
         curFilter = document.getElementById("filterSelect").selectedIndex;
         redrawEvents();
-    };
-
-    this.filter = function(clients) {
-        return CollectionUtil.filter(clients, filterClient);
     };
 }
 
@@ -50,8 +80,9 @@ function redrawEvents() {
 
 function fillEventTable(table) {
 
-    for(var key in events) {
-        var event = events[key];
+    var filteredEvents = filterer.filterEvents(events);
+    for(var key in filteredEvents) {
+        var event = filteredEvents[key];
 
         var row = document.createElement("div");
         row.className = "row";
@@ -70,7 +101,7 @@ function fillEventTable(table) {
             row.appendChild(createClientHeader());
         }
         
-        var filteredClients = filterer.filter(event.clients);
+        var filteredClients = filterer.filterClients(event.clients);
         CollectionUtil.forEach(filteredClients, function (client, index) {
 
             var innerRow = document.createElement("div");

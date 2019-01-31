@@ -101,9 +101,14 @@ function Event(name, date, adultOnly) {
     this.name = name;
     this.adultOnly = adultOnly;  
     this.clients = [];
+
     this.addClient = function (client) {
         this.clients.push(client);
     };
+
+    this.numClients = function() {
+        return this.clients.length;
+    }
 
     this.getDate = function() { 
         return date.getFullYear() + "/" + (date.getMonth() + 1) + "/" + date.getDate();
