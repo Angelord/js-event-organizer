@@ -70,3 +70,20 @@ div.row div.col:nth-child(1) {
     width: 5%;
     text-align: center;
 }
+
+div.inner_row div.col:last-child {
+    float: right;
+}
+
+.col button {
+    border: 1px solid gray;
+    margin: 0;
+    padding: 0;
+    height: 92%;
+    width: 92%;
+    background-color: whitesmoke;
+}
+
+.col button:hover {
+    background-color: gray;
+}
